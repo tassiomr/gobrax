@@ -1,4 +1,4 @@
-import { red } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -17,6 +17,9 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    info: {
+      main: grey['800'],
+    }
   },
 });
 

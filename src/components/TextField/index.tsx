@@ -1,22 +1,46 @@
-import { FormLabel, TextField, TextFieldProps as MUIInputProps, Box } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
+import {
+  FormLabel as MUIFormLabel,
+  TextField,
+  TextFieldProps as MUIInputProps,
+  Stack,
+  styled
+} from "@mui/material";
+
+const FormLabel = styled(MUIFormLabel)({
+  fontWeight: '500',
+  textTransform: 'uppercase',
+  fontSize: '0.8rem',
+  alignSelf: 'flex-start'
+});
 
 type InputProps = {
-  labelText: string
+  labelText: string;
+  errorText?: string;
+  icon?: ReactNode;
 } & MUIInputProps;
 
-const InputText = React.forwardRef((props: InputProps, ref) => {
+const InputText = 
+  React.forwardRef((props: InputProps, ref) => {
   return (
-    <Box display='flex'
-      flexDirection={'row'}
-      gap={4}
+    <Stack display='flex'
+      flexDirection={'column'}
+      spacing={1}
       justifyContent={'flex-end'}
-      flex={1}
+      alignItems={'flex-end'}
       width={'100%'} >
       <FormLabel>{props.labelText}</FormLabel>
-      <TextField sx={{ width: '75%' }} {...props} ref={ref} />
-    </Box>
+      <TextField
+        InputProps={{
+          startAdornment: props.icon ? props.icon : null
+        }}
+        sx={{ width: '100%' }}
+        //@ts-ignore
+        ref={ref}
+        {...props}
+      />
+    </Stack>
   )
-})
+  })
 
 export default InputText;
