@@ -14,8 +14,8 @@ type Style = {
 
 export default function LinkButton({ route, label, isActive }: LinkButtonProps) {
   const style: Style = isActive ? 
-    { variant: 'contained', color: 'secondary' } 
-    : { variant: 'text', color: 'secondary' };
+    { variant: 'contained', color: 'info' } 
+    : { variant: 'text', color: 'info' };
   return (
     <Button
       variant={style.variant}
