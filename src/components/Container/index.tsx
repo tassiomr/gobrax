@@ -7,13 +7,13 @@ type ContainerProps = {
   headerActionComponent?: ReactNode
 }
 
-export default function Container({ children }: ContainerProps) {
+export default function Container({ children, headerActionComponent }: ContainerProps) {
   return (
     <MContainer
       maxWidth={false}
       disableGutters
       sx={{ width: '100%', margin: 0, height: '100vh' }}>
-      <AppBar />
+      <AppBar actionComponent={headerActionComponent} />
       {children}
     </MContainer>
   )
