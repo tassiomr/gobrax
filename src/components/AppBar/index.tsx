@@ -64,7 +64,7 @@ export default function Bar({ actionComponent }: BarProps) {
             <img width='50%' height='25%' src={Logo} alt="Logo da aplicação" />
           </Link>
         </Box>
-        <Box flex={1}>
+        <Box sx={{ pl: 8 }} flex={1} display="flex" justifyContent="flex-end">
           {actionComponent}
         </Box>
       </Box>
