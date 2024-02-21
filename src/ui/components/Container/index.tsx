@@ -1,6 +1,7 @@
 import { Container as MContainer } from '@mui/material';
 import { ReactNode } from 'react';
 import AppBar from '../AppBar';
+import Snackbar from '../Snackbar';
 
 type ContainerProps = {
   children: ReactNode;
@@ -19,6 +20,7 @@ export default function Container({
     >
       <AppBar actionComponent={headerActionComponent} />
       {children}
+      <Snackbar />
     </MContainer>
   );
 }

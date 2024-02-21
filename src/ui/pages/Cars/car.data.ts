@@ -2,7 +2,7 @@ import { useState } from 'react';
 import constants from '../../../app/configs/constants';
 import useForm, { FormType } from '../../../app/hooks/useForm';
 import { Car, CarSchema, CarZod } from '../../../domain/models/car.model';
-import { useCars } from '../../../app/contexts/cars.context';
+import useCars from '../../../app/hooks/useCars';
 
 export type CarConstants = typeof constants.carsPage;
 

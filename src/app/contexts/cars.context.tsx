@@ -1,11 +1,6 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Car } from '../../domain/models/car.model';
+import useSnackbar from '../hooks/useSnackbar';
 
 type CarFunction = (car: Car) => Promise<void>;
 
@@ -19,7 +14,7 @@ type CarsContextDataType = {
   isLoading: boolean;
 };
 
-const CarsContextData = createContext({} as CarsContextDataType);
+export const CarsContextData = createContext({} as CarsContextDataType);
 
 export function CarsContextDataProvider({ children }: { children: ReactNode }) {
   const [cars, setCars] = useState<Car[]>([]);
@@ -76,8 +71,4 @@ export function CarsContextDataProvider({ children }: { children: ReactNode }) {
       {children}
     </CarsContextData.Provider>
   );
-}
-
-export function useCars() {
-  return useContext(CarsContextData);
 }
