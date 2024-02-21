@@ -2,6 +2,7 @@ import { useState } from 'react';
 import constants from '../../configs/constants';
 import useForm, { FormType } from '../../hooks/useForm';
 import { Car, CarSchema, CarZod } from '../../models/car.model';
+import { useCars } from '../../contexts/cars.context';
 
 export type CarConstants = typeof constants.carsPage;
 
@@ -18,7 +19,7 @@ export type UseDataType = {
     isOpenModal: boolean;
     canShowNoDataYet: boolean;
     isLoading: boolean;
-    isAddingCar: boolean;
+    isAddEditLoading: boolean;
   };
   actions: {
     changeVisibleModalState: () => void;
@@ -30,40 +31,25 @@ export type UseDataType = {
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
-  const [isLoading] = useState(false);
-  const [isAddingCar] = useState(false);
 
-  const [cars, setCars] = useState<Array<Car>>([]);
+  const { cars, addCar, deleteCar, editCar, isLoading, isAddEditLoading } =
+    useCars();
 
   const form = useForm<Car, CarZod>(CarSchema);
 
   const canShowTable = !!cars.length && !isLoading;
   const canShowNoDataYet = cars.length === 0 && !isLoading;
 
-  const addCar = (car: Car) => {
-    setCars((state) => {
-      const oldState = Object.assign([], state);
-      oldState.push({ id: Date.now().toString(), ...car });
-
-      return oldState;
-    });
-
+  const handleAddCar = async (car: Car) => {
+    await addCar(car);
+    changeVisibleModalState(false);
     form.reset();
-    changeVisibleModalState((state) => !state);
-  };
-
-  const deleteCar = (car: Car) => {
-    setCars((state) => state.filter((sCar) => sCar.id !== car.id));
-  };
-
-  const editCar = (car: Car) => {
-    console.log(car);
   };
 
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
-      addCar,
+      addCar: handleAddCar,
       deleteCar,
       editCar,
     },
@@ -71,7 +57,7 @@ export default function useData(): UseDataType {
       isOpenModal,
       canShowNoDataYet,
       canShowTable,
-      isAddingCar,
+      isAddEditLoading,
       isLoading,
     },
     data: {

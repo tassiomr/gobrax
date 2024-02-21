@@ -8,12 +8,12 @@ import {
 import constants from '../../configs/constants';
 
 type SelectorProps = {
-  composeObject: (data: any) => {
+  composeObject: (data: unknown) => {
     label: string;
     key: string;
     value: string;
   };
-  options: Array<any>;
+  options: Array<unknown>;
   selectProps: TextFieldProps;
   labelText: string;
 };

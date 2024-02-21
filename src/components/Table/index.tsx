@@ -10,9 +10,9 @@ import {
 import { ReactNode } from 'react';
 
 type TableProps = {
-  data: Array<any>;
+  data: Array<unknown>;
   headers: Array<string>;
-  renderCell: (data: any) => ReactNode;
+  renderCell: (data: unknown) => ReactNode;
   ariaLabel: string;
 };
 

@@ -6,12 +6,15 @@ import { CssBaseline } from '@mui/material';
 import theme from './theme';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes';
+import { CarsContextDataProvider } from './contexts/cars.context';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <CarsContextDataProvider>
+        <RouterProvider router={router} />
+      </CarsContextDataProvider>
       <CssBaseline />
-      <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>,
 );

@@ -8,12 +8,18 @@ import { Car } from '../../../models/car.model';
 type FormProps = {
   form: FormType<Car>;
   constants: CarConstants;
-  isAddingCar: boolean;
+  isAddEditLoading: boolean;
   addCar: CarFunction;
   changeVisibleModalState: () => void;
 };
 
-export default function Form({ form, constants, isAddingCar, addCar, changeVisibleModalState }: FormProps) {
+export default function Form({
+  form,
+  constants,
+  isAddEditLoading,
+  addCar,
+  changeVisibleModalState,
+}: FormProps) {
   return (
     <Stack
       border={'none'}
@@ -26,7 +32,9 @@ export default function Form({ form, constants, isAddingCar, addCar, changeVisib
     >
       <Stack mb={6}>
         <Typographies.Title>{constants.modal.title}</Typographies.Title>
-        <Typographies.Description>{constants.modal.description}</Typographies.Description>
+        <Typographies.Description>
+          {constants.modal.description}
+        </Typographies.Description>
       </Stack>
       <Stack
         component="form"
@@ -55,12 +63,21 @@ export default function Form({ form, constants, isAddingCar, addCar, changeVisib
         </Stack>
         <Box component="div" p={1} />
         <Divider />
-        <Stack direction={'row'} justifyContent={'flex-end'} useFlexGap spacing={2}>
-          <Buttons.Default onClick={changeVisibleModalState} variant="outlined" color="info">
+        <Stack
+          direction={'row'}
+          justifyContent={'flex-end'}
+          useFlexGap
+          spacing={2}
+        >
+          <Buttons.Default
+            onClick={changeVisibleModalState}
+            variant="outlined"
+            color="info"
+          >
             {constants.modal.buttons.cancel}
           </Buttons.Default>
           <Buttons.Default
-            isLoading={isAddingCar}
+            isLoading={isAddEditLoading}
             variant="contained"
             color="info"
             disabled={!form.formState.isDirty || !form.formState.isValid}

@@ -16,7 +16,7 @@ export default function Cars() {
     isLoading,
     canShowNoDataYet,
     canShowTable,
-    isAddingCar,
+    isAddEditLoading,
   } = status;
   const { cars, form, constants } = data;
   const { changeVisibleModalState, addCar, deleteCar, editCar } = actions;
@@ -33,7 +33,7 @@ export default function Cars() {
         <Form
           constants={constants}
           form={form}
-          isAddingCar={isAddingCar}
+          isAddEditLoading={isAddEditLoading}
           changeVisibleModalState={changeVisibleModalState}
           addCar={addCar}
         />
