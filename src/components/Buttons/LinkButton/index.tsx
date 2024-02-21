@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Button } from "./styles";
 
 type LinkButtonProps = {
   route: string,
@@ -21,7 +21,10 @@ export default function LinkButton({ route, label, isActive }: LinkButtonProps) 
       variant={style.variant}
       color={style.color}
       disableElevation
-      sx={{ borderRadius: 100, fontWeight: 'bold' }}
-      component={Link} to={route}>{label}</Button>
+      component={Link} 
+      to={route}
+    >
+      {label}
+    </Button>
   )
 }

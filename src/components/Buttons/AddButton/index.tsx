@@ -1,21 +1,15 @@
 import { AddCircle } from "@mui/icons-material";
-import { Button, ButtonProps } from "@mui/material";
+import { ButtonProps } from "@mui/material";
+import { Button } from './styles';
 
-type AddButtonProps = {
-  text: string;
-  onClick: () => void
-} & ButtonProps
-
-export default function LinkButton(props : AddButtonProps) {
-
+export default function AddButton(props : ButtonProps) {
   return (
     <Button
-      variant="outlined"
-      color="info"
+      variant="contained"
+      color="primary"
       disableElevation
       startIcon={<AddCircle />}
-      sx={{ borderRadius: 100, fontWeight: 'bold' }}
       {...props}
-      >{props.text}</Button>
+      >Adicionar</Button>
   )
 }

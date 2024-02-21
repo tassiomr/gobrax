@@ -1,20 +1,20 @@
-import { Button as MUIButton, CircularProgress, ButtonProps as MUIButtonProps, styled} from "@mui/material";
+import {
+  CircularProgress,
+  ButtonProps as MUIButtonProps,
+} from "@mui/material";
+import { Button } from './styles';
 
 type ButtonProps = {
   isLoading?: boolean
 } & MUIButtonProps
 
-const Button = styled(MUIButton)({
-  minWidth: 80
-})
 
-export default function LinkButton(props: ButtonProps) {
+export default function DefaultButton(props: ButtonProps) {
   return (
     <Button
-      sx={{ borderRadius: 8, fontWeight: 'bold' }}
       {...props}
       disableElevation
-    >{props.isLoading ? <CircularProgress 
-        size={20} color='inherit' /> : props.children}</Button>
+    >{props.isLoading ? <CircularProgress
+      size={20} color='inherit' /> : props.children}</Button>
   )
 }

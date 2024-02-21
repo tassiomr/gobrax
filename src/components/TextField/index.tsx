@@ -6,6 +6,7 @@ import {
   Stack,
   styled
 } from "@mui/material";
+import { Typographies } from "..";
 
 const FormLabel = styled(MUIFormLabel)({
   fontWeight: '500',
@@ -20,27 +21,33 @@ type InputProps = {
   icon?: ReactNode;
 } & MUIInputProps;
 
-const InputText = 
+const InputText =
   React.forwardRef((props: InputProps, ref) => {
-  return (
-    <Stack display='flex'
-      flexDirection={'column'}
-      spacing={1}
-      justifyContent={'flex-end'}
-      alignItems={'flex-end'}
-      width={'100%'} >
-      <FormLabel>{props.labelText}</FormLabel>
-      <TextField
-        InputProps={{
-          startAdornment: props.icon ? props.icon : null
-        }}
-        sx={{ width: '100%' }}
-        //@ts-ignore
-        ref={ref}
-        {...props}
-      />
-    </Stack>
-  )
+    return (
+      <Stack display='flex'
+        flexDirection={'column'}
+        spacing={1}
+        justifyContent={'flex-end'}
+        alignItems={'flex-end'}
+        width={'100%'} >
+        <FormLabel>{props.labelText}</FormLabel>
+        <TextField
+          InputProps={{
+            startAdornment: props.icon ? props.icon : null
+          }}
+          sx={{ width: '100%' }}
+          //@ts-ignore
+          ref={ref}
+          {...props}
+        />
+        <Typographies.Message
+          status='error'
+          sx={{ alignSelf: 'flex-start' }}
+        >
+          {props.errorText}
+        </Typographies.Message>
+      </Stack>
+    )
   })
 
 export default InputText;

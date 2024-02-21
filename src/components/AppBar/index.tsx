@@ -48,7 +48,7 @@ export default function Bar({ actionComponent }: BarProps) {
           {linkButtons.map(({ route, label }) => (
             <Buttons.LinkButton 
               key={route}
-              route={route} 
+              route={`/${route}`} 
               label={label}
               isActive={compareUrl(route, pathname)}
             />
