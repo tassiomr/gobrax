@@ -6,22 +6,22 @@ import { CarConstants, CarFunction } from '../car.data';
 import theme from '../../../theme';
 
 type TableProps = {
-  constants: CarConstants,
-  cars: Array<Car>,
-  editCar: CarFunction,
-  deleteCar: CarFunction
-}
+  constants: CarConstants;
+  cars: Array<Car>;
+  editCar: CarFunction;
+  deleteCar: CarFunction;
+};
 
 const iconStyle = {
   color: theme.palette.primary.main,
-  ":hover": { opacity: 0.5 }
-}
+  ':hover': { opacity: 0.5 },
+};
 
 export default function TableCar({
   constants,
   cars,
   editCar,
-  deleteCar
+  deleteCar,
 }: TableProps) {
   return (
     <Table
@@ -34,9 +34,15 @@ export default function TableCar({
             key={item.plate}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            <TableCell align="center" component="th" scope="row">{item.id}</TableCell>
-            <TableCell align="center" component="th" scope="row">{item.name}</TableCell>
-            <TableCell align="center" component="th" scope="row">{item.plate}</TableCell>
+            <TableCell align="center" component="th" scope="row">
+              {item.id}
+            </TableCell>
+            <TableCell align="center" component="th" scope="row">
+              {item.name}
+            </TableCell>
+            <TableCell align="center" component="th" scope="row">
+              {item.plate}
+            </TableCell>
             <TableCell align="center" component="th" scope="row">
               <DeleteOutlineOutlined
                 onClick={() => deleteCar(item)}
@@ -50,7 +56,8 @@ export default function TableCar({
               />
             </TableCell>
           </TableRow>
-        )
+        );
       }}
-    />)
+    />
+  );
 }

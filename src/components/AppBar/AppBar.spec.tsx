@@ -6,16 +6,15 @@ import Bar from '.';
 describe('Bar Component Test Suit', () => {
   beforeEach(() => {
     const ActionComponent = () => <button>Click me</button>;
-    
-    render(
-      <Bar actionComponent={<ActionComponent />} />,
-      { wrapper: WrapperTestUtils }
-    )
+
+    render(<Bar actionComponent={<ActionComponent />} />, {
+      wrapper: WrapperTestUtils,
+    });
   });
 
   afterEach(() => {
     cleanup();
-  })
+  });
 
   it('correctly renders navigation buttons', () => {
     const driversButton = screen.getByText(/Motoristas/i);
@@ -27,11 +26,11 @@ describe('Bar Component Test Suit', () => {
 
   it('correctly renders the logo', () => {
     const logo = screen.getByAltText('Logo da aplicação');
-    expect(logo).toBeInTheDocument()
+    expect(logo).toBeInTheDocument();
   });
 
   it('correctly renders the action component', () => {
     const actionButton = screen.getByRole('button', { name: /click me/i });
-    expect(actionButton).toBeInTheDocument()
+    expect(actionButton).toBeInTheDocument();
   });
 });

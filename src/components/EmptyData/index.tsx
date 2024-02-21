@@ -1,22 +1,21 @@
-import { Stack } from "@mui/material";
-import { Buttons, Typographies } from "..";
-import Lottie from "lottie-react";
+import { Stack } from '@mui/material';
+import { Buttons, Typographies } from '..';
+import Lottie from 'lottie-react';
 import NoDataYet from '../../assets/noDate.lottie.json';
 
 type EmptyDataProps = {
   message: string;
   buttonAction: () => void;
-  isVisible: boolean
-}
+  isVisible: boolean;
+};
 
 export default function EmptyData({
   message,
   isVisible,
-  buttonAction
+  buttonAction,
 }: EmptyDataProps) {
-
   if (!isVisible) return null;
-  
+
   return (
     <Stack
       p={4}
@@ -28,7 +27,7 @@ export default function EmptyData({
       <Lottie
         style={{
           minWidth: 80,
-          minHeight: 80
+          minHeight: 80,
         }}
         animationData={NoDataYet}
       />
@@ -37,5 +36,5 @@ export default function EmptyData({
       </Typographies.Title>
       <Buttons.AddButton onClick={buttonAction} />
     </Stack>
-  )
+  );
 }

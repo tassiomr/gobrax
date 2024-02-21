@@ -6,20 +6,14 @@ import { FormType } from '../../../hooks/useForm';
 import { Car } from '../../../models/car.model';
 
 type FormProps = {
-  form: FormType<Car>,
-  constants: CarConstants,
-  isAddingCar: boolean,
-  addCar: CarFunction,
-  changeVisibleModalState: () => void
-}
+  form: FormType<Car>;
+  constants: CarConstants;
+  isAddingCar: boolean;
+  addCar: CarFunction;
+  changeVisibleModalState: () => void;
+};
 
-export default function Form({
-  form,
-  constants,
-  isAddingCar,
-  addCar,
-  changeVisibleModalState
-}: FormProps) {
+export default function Form({ form, constants, isAddingCar, addCar, changeVisibleModalState }: FormProps) {
   return (
     <Stack
       border={'none'}
@@ -31,15 +25,11 @@ export default function Form({
       sx={{ background: 'white', padding: 4 }}
     >
       <Stack mb={6}>
-        <Typographies.Title>
-          {constants.modal.title}
-        </Typographies.Title>
-        <Typographies.Description>
-          {constants.modal.description}
-        </Typographies.Description>
+        <Typographies.Title>{constants.modal.title}</Typographies.Title>
+        <Typographies.Description>{constants.modal.description}</Typographies.Description>
       </Stack>
       <Stack
-        component='form'
+        component="form"
         spacing={2}
         justifyContent={'flex-end'}
         direction={'column'}
@@ -63,19 +53,10 @@ export default function Form({
             errorText={form.formState.errors.plate?.message}
           />
         </Stack>
-        <Box component='div' p={1} />
+        <Box component="div" p={1} />
         <Divider />
-        <Stack
-          direction={'row'}
-          justifyContent={'flex-end'}
-          useFlexGap
-          spacing={2}
-        >
-          <Buttons.Default
-            onClick={changeVisibleModalState}
-            variant="outlined"
-            color="info"
-          >
+        <Stack direction={'row'} justifyContent={'flex-end'} useFlexGap spacing={2}>
+          <Buttons.Default onClick={changeVisibleModalState} variant="outlined" color="info">
             {constants.modal.buttons.cancel}
           </Buttons.Default>
           <Buttons.Default
@@ -83,11 +64,12 @@ export default function Form({
             variant="contained"
             color="info"
             disabled={!form.formState.isDirty || !form.formState.isValid}
-            type='submit'
+            type="submit"
           >
             {constants.modal.buttons.add}
           </Buttons.Default>
         </Stack>
       </Stack>
-    </Stack>)
+    </Stack>
+  );
 }

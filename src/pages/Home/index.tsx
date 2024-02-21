@@ -1,10 +1,9 @@
-import { Container } from "../../components";
+import { Container } from '../../components';
 
 export default function Home() {
-
   return (
     <Container>
-        <div>HOME</div>
+      <div>HOME</div>
     </Container>
-  )
+  );
 }

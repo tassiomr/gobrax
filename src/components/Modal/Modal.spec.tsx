@@ -7,7 +7,7 @@ describe('Modal Component', () => {
     render(
       <Modal open={true} onClose={() => {}}>
         <div data-testid="modal-content">Modal Content</div>
-      </Modal>
+      </Modal>,
     );
 
     const modalContent = screen.getByTestId('modal-content');
@@ -18,7 +18,7 @@ describe('Modal Component', () => {
     render(
       <Modal open={false} onClose={() => {}}>
         <div data-testid="modal-content">Modal Content</div>
-      </Modal>
+      </Modal>,
     );
 
     const modalContent = screen.queryByTestId('modal-content');

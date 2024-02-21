@@ -9,30 +9,17 @@ import HeaderPage from '../../components/HeaderPage';
 
 export default function Cars() {
   const vm = useData();
-  const {
-    status,
-    data,
-    actions
-  } = vm;
+  const { status, data, actions } = vm;
 
   const {
     isOpenModal,
     isLoading,
     canShowNoDataYet,
     canShowTable,
-    isAddingCar
+    isAddingCar,
   } = status;
-  const {
-    cars,
-    form,
-    constants
-  } = data;
-  const {
-    changeVisibleModalState,
-    addCar,
-    deleteCar,
-    editCar,
-  } = actions;
+  const { cars, form, constants } = data;
+  const { changeVisibleModalState, addCar, deleteCar, editCar } = actions;
 
   return (
     <Container>
@@ -60,19 +47,19 @@ export default function Cars() {
               <Buttons.AddButton onClick={vm.actions.changeVisibleModalState} />
             }
           />
-          <Table 
+          <Table
             editCar={editCar}
             deleteCar={deleteCar}
             cars={cars}
             constants={constants}
           />
-        </Box>) : null}
+        </Box>
+      ) : null}
       <EmptyData
         isVisible={canShowNoDataYet}
         message={constants.noDataYet}
         buttonAction={changeVisibleModalState}
       />
-
     </Container>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { Stack } from "@mui/material";
-import { Typographies } from "..";
-import { ReactNode } from "react";
+import { Stack } from '@mui/material';
+import { Typographies } from '..';
+import { ReactNode } from 'react';
 
 type HeaderPageProps = {
   title: string;
-  rightAction?: ReactNode
-}
+  rightAction?: ReactNode;
+};
 
 export default function HeaderPage({ title, rightAction }: HeaderPageProps) {
   return (
@@ -16,10 +16,8 @@ export default function HeaderPage({ title, rightAction }: HeaderPageProps) {
       direction={'row'}
       justifyContent={'space-between'}
     >
-      <Typographies.Title>
-        {title}
-      </Typographies.Title>
+      <Typographies.Title>{title}</Typographies.Title>
       {rightAction}
     </Stack>
-  )
+  );
 }

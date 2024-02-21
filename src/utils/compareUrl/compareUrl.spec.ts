@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 
-import compareUrl from "./";
+import compareUrl from './';
 
 describe('Testing compare URL component', () => {
   it('Should return true if the given route matches the path', () => {
-     const route = 'drivers';
-     const path = '/drivers';
+    const route = 'drivers';
+    const path = '/drivers';
 
     expect(compareUrl(route, path)).toBeTruthy();
   });

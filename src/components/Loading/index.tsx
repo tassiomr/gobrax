@@ -1,8 +1,8 @@
-import { Stack } from "@mui/material";
-import Lottie from "lottie-react";
-import TruckLoading from '../../assets/truckLoading.lottie.json'
-import { Typographies } from "..";
-import constants from "../../configs/constants";
+import { Stack } from '@mui/material';
+import Lottie from 'lottie-react';
+import TruckLoading from '../../assets/truckLoading.lottie.json';
+import { Typographies } from '..';
+import constants from '../../configs/constants';
 
 type LoadingProps = {
   'data-testid'?: string;
@@ -14,18 +14,19 @@ export default function Loading(props: LoadingProps) {
 
   return (
     <Stack
-      data-testid={props["data-testid"]}
-      p={8} alignItems={'center'}
+      data-testid={props['data-testid']}
+      p={8}
+      alignItems={'center'}
       justifyContent={'center'}
     >
-      <Lottie 
-      animationData={TruckLoading} style={{
-        width: '40%',
-        height: '40%'
-      }} />
-      <Typographies.Title>
-        {constants.components.loading}
-      </Typographies.Title>
+      <Lottie
+        animationData={TruckLoading}
+        style={{
+          width: '40%',
+          height: '40%',
+        }}
+      />
+      <Typographies.Title>{constants.components.loading}</Typographies.Title>
     </Stack>
-  )
+  );
 }

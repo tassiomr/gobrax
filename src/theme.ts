@@ -6,24 +6,24 @@ const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: grey[200]
-        }
-      }
+          backgroundColor: grey[200],
+        },
+      },
     },
     MuiTableHead: {
       styleOverrides: {
         root: {
-          background: '#fff'
-        }
-      }
+          background: '#fff',
+        },
+      },
     },
-    MuiTableCell:{ 
+    MuiTableCell: {
       styleOverrides: {
         root: {
-          textTransform: 'capitalize'
-        }
-      }
-    }
+          textTransform: 'capitalize',
+        },
+      },
+    },
   },
   palette: {
     primary: {
@@ -35,14 +35,14 @@ const theme = createTheme({
       main: '#ff9100',
       light: '#ffa733',
       dark: '#b26500',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
     error: {
       main: red.A400,
     },
     info: {
       main: grey['800'],
-    }
+    },
   },
 });
 

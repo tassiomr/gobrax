@@ -1,9 +1,9 @@
-import { AddCircle } from "@mui/icons-material";
-import { ButtonProps } from "@mui/material";
+import { AddCircle } from '@mui/icons-material';
+import { ButtonProps } from '@mui/material';
 import { Button } from './styles';
-import constants from "../../../configs/constants";
+import constants from '../../../configs/constants';
 
-export default function AddButton(props : ButtonProps) {
+export default function AddButton(props: ButtonProps) {
   return (
     <Button
       variant="contained"
@@ -11,6 +11,8 @@ export default function AddButton(props : ButtonProps) {
       disableElevation
       startIcon={<AddCircle />}
       {...props}
-      >{constants.components.buttons.add}</Button>
-  )
+    >
+      {constants.components.buttons.add}
+    </Button>
+  );
 }

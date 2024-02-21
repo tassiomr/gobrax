@@ -1,1 +1,1 @@
-export { default as compareUrl } from './compareUrl'
+export { default as compareUrl } from './compareUrl';

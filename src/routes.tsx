@@ -1,16 +1,18 @@
-import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
-import ErrorPage from "./pages/Error";
-import Cars from "./pages/Cars";
+import { createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
+import ErrorPage from './pages/Error';
+import Cars from './pages/Cars';
 
-export default createBrowserRouter([
+const routes = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: '/cars',
-    element: <Cars />
-  }
+    element: <Cars />,
+  },
 ]);
+
+export default routes;

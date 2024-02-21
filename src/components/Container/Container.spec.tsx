@@ -10,14 +10,14 @@ describe('Container Component Test Suit', () => {
     render(
       <Container headerActionComponent={button}>
         <div data-testid="children"></div>
-      </Container>, 
-      { wrapper: WrapperTestUtils }
-    )
-  })
+      </Container>,
+      { wrapper: WrapperTestUtils },
+    );
+  });
 
-  afterAll(() =>  { 
-    cleanup() 
-  })
+  afterAll(() => {
+    cleanup();
+  });
 
   it('renders children correctly', () => {
     const childComponent = screen.getByTestId('children');
@@ -29,7 +29,7 @@ describe('Container Component Test Suit', () => {
     expect(actionComponent).toBeInTheDocument();
   });
 
-  it('renders header navigation component correctly',  () => {
+  it('renders header navigation component correctly', () => {
     const driversButton = screen.getByText(/Motoristas/i);
     const carsButton = screen.getByText(/Veículos/i);
 
@@ -39,6 +39,6 @@ describe('Container Component Test Suit', () => {
 
   it('renders header logo component correctly', () => {
     const logo = screen.getByAltText('Logo da aplicação');
-    expect(logo).toBeInTheDocument()
+    expect(logo).toBeInTheDocument();
   });
 });

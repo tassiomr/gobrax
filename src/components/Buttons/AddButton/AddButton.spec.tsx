@@ -5,15 +5,12 @@ import { WrapperTestUtils } from '../../../__test__/utils/wrapper';
 
 describe('AddButton Component Tests', () => {
   beforeEach(() => {
-    render(
-      <AddButton />,
-      { wrapper: WrapperTestUtils }
-    )
-  })
+    render(<AddButton />, { wrapper: WrapperTestUtils });
+  });
 
   afterAll(() => {
-    cleanup()
-  })
+    cleanup();
+  });
 
   it('renders button with correct text', () => {
     const button = screen.getByText('Adicionar');
@@ -30,7 +27,7 @@ describe('AddButton Component Tests', () => {
     expect(button).toHaveStyle({
       color: 'rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgb(174, 142, 11)',
-      fontWeight: 'bold'
-    })
+      fontWeight: 'bold',
+    });
   });
 });
