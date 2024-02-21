@@ -33,7 +33,7 @@ const InputText =
         <FormLabel>{props.labelText}</FormLabel>
         <TextField
           InputProps={{
-            startAdornment: props.icon ? props.icon : null
+            startAdornment: props.icon ? props.icon : null,
           }}
           sx={{ width: '100%' }}
           //@ts-ignore

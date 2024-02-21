@@ -1,28 +1,12 @@
-import { Box, Modal as MUIModal } from '@mui/material';
-import  { ReactNode } from 'react';
+import { Box, Modal as MUIModal, ModalProps as MUIModalProps } from '@mui/material';
 
-type ModalProps = {
-  children: ReactNode,
-  isOpen: boolean,
-  onClose: () => void,
-  ariaLabel?: string,
-  ariaDescription?: string,
-}
+type ModalProps = { 
+  'data-testid'?: string
+} & MUIModalProps;
 
-export default function Modal({ 
-  children, 
-  isOpen, 
-  onClose,
-  ariaLabel,
-  ariaDescription
-}: ModalProps)  {
+export default function Modal(props: ModalProps)  {
   return (
-    <MUIModal
-      open={isOpen}
-      onClose={onClose}
-      aria-labelledby={ariaLabel}
-      aria-describedby={ariaDescription}
-    >
+    <MUIModal {...props}>
       <Box 
         width={'100%'} 
         height={'100vh'} 
@@ -30,7 +14,7 @@ export default function Modal({
         justifyContent={'center'} 
         alignItems={'center'}
       >
-        {children}
+        {props.children}
       </Box>
     </MUIModal>
   );

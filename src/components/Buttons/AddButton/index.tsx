@@ -1,6 +1,7 @@
 import { AddCircle } from "@mui/icons-material";
 import { ButtonProps } from "@mui/material";
 import { Button } from './styles';
+import constants from "../../../configs/constants";
 
 export default function AddButton(props : ButtonProps) {
   return (
@@ -10,6 +11,6 @@ export default function AddButton(props : ButtonProps) {
       disableElevation
       startIcon={<AddCircle />}
       {...props}
-      >Adicionar</Button>
+      >{constants.components.buttons.add}</Button>
   )
 }

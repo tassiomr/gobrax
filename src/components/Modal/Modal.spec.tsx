@@ -5,7 +5,7 @@ import Modal from '.';
 describe('Modal Component', () => {
   it('renders modal content when isOpen is true', () => {
     render(
-      <Modal isOpen={true} onClose={() => {}}>
+      <Modal open={true} onClose={() => {}}>
         <div data-testid="modal-content">Modal Content</div>
       </Modal>
     );
@@ -16,7 +16,7 @@ describe('Modal Component', () => {
 
   it('does not render modal content when isOpen is false', () => {
     render(
-      <Modal isOpen={false} onClose={() => {}}>
+      <Modal open={false} onClose={() => {}}>
         <div data-testid="modal-content">Modal Content</div>
       </Modal>
     );

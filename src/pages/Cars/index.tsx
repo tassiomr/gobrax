@@ -1,100 +1,78 @@
-import { Box, Divider, Stack, TextField as MUITextField } from "@mui/material";
-import { Buttons, Container, TextField, Typographies } from "../../components";
-import useData from "./car.data";
-import Modal from "../../components/Modal";
-import { 
-  DirectionsCarOutlined, 
-  SubjectOutlined  
-} from "@mui/icons-material";
+import { Box } from '@mui/material';
+import { Buttons, Container, Modal } from '../../components';
+import useData from './car.data';
+import Form from './components/Form';
+import Table from './components/Table';
+import EmptyData from '../../components/EmptyData';
+import Loading from '../../components/Loading';
+import HeaderPage from '../../components/HeaderPage';
 
 export default function Cars() {
-  const data = useData();
-  const { formState, handleSubmit } = data.form;
+  const vm = useData();
+  const {
+    status,
+    data,
+    actions
+  } = vm;
 
-  const handle = (data: any) => {
-    console.log(data)
-  }
+  const {
+    isOpenModal,
+    isLoading,
+    canShowNoDataYet,
+    canShowTable,
+    isAddingCar
+  } = status;
+  const {
+    cars,
+    form,
+    constants
+  } = data;
+  const {
+    changeVisibleModalState,
+    addCar,
+    deleteCar,
+    editCar,
+  } = actions;
 
   return (
-    <Container
-      headerActionComponent={
-        <Buttons.AddButton
-          text={data.constants.headerButton}
-          onClick={data.changeVisibleModalState}
-        />}
-    >
-      <Modal 
-        isOpen={data.isOpen} 
-        onClose={data.changeVisibleModalState}
-        ariaDescription={data.constants.modal.description}
-        ariaLabel={data.constants.modal.title}
+    <Container>
+      <Modal
+        open={isOpenModal}
+        onClose={changeVisibleModalState}
+        aria-describedby={constants.modal.description}
+        aria-labelledby={constants.modal.title}
+        data-testid={'modal-add-car'}
       >
-        <Stack
-          border={'none'}
-          borderRadius={2}
-          width={'auto'}
-          minWidth={'40%'}
-          height={'auto'}
-          minHeight={'50%'}
-          sx={{ background: 'white', padding: 4 }}
-        >
-          <Stack mb={6}>
-          <Typographies.Title>
-              {data.constants.modal.title}
-            </Typographies.Title>
-            <Typographies.Description>
-              {data.constants.modal.description}
-            </Typographies.Description>
-          </Stack>
-          <Stack
-            component='form'
-            spacing={2}
-            justifyContent={'flex-end'}
-            direction={'column'}
-            onSubmit={handleSubmit(handle)}
-          >
-            <Stack spacing={2} justifyContent={'flex-end'} direction={'column'}>
-              <TextField 
-                {...data.form.register('name')} 
-                labelText={data.constants.modal.input.name} 
-                icon={<DirectionsCarOutlined />}
-                error={!!data.form.formState.errors.name}
-              />
-              <TextField 
-                {...data.form.register('plate')} 
-                labelText={data.constants.modal.input.plate} 
-                icon={<SubjectOutlined />}
-                error={!!data.form.formState.errors.plate}
-              />
-            </Stack>
-            <Box component='div' p={1} />
-            <Divider />
-            <Stack
-              direction={'row'}
-              justifyContent={'flex-end'}
-              useFlexGap
-              spacing={2}
-            >
-              <Buttons.Default 
-                onClick={data.changeVisibleModalState} 
-                variant="outlined" 
-                color="info"
-              >
-                {data.constants.modal.buttons.cancel}
-              </Buttons.Default>
-              <Buttons.Default 
-                isLoading={data.isLoading}
-                variant="contained" 
-                color="info"
-                disabled={!data.form.formState.isDirty || !data.form.formState.isValid}
-                type='submit'
-              >
-                {data.constants.modal.buttons.add}
-              </Buttons.Default>
-            </Stack>
-          </Stack>
-        </Stack>
+        <Form
+          constants={constants}
+          form={form}
+          isAddingCar={isAddingCar}
+          changeVisibleModalState={changeVisibleModalState}
+          addCar={addCar}
+        />
       </Modal>
+      <Loading isVisible={isLoading} />
+      {canShowTable ? (
+        <Box p={8} sx={{ flex: 1, width: '100%' }}>
+          <HeaderPage
+            title={vm.data.constants.title}
+            rightAction={
+              <Buttons.AddButton onClick={vm.actions.changeVisibleModalState} />
+            }
+          />
+          <Table 
+            editCar={editCar}
+            deleteCar={deleteCar}
+            cars={cars}
+            constants={constants}
+          />
+        </Box>) : null}
+      <EmptyData
+        isVisible={canShowNoDataYet}
+        message={constants.noDataYet}
+        buttonAction={changeVisibleModalState}
+      />
+
     </Container>
   )
 }

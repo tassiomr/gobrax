@@ -7,7 +7,7 @@ type HeaderPageProps = {
   rightAction?: ReactNode
 }
 
-export default function HeaderPage({ rightAction }: HeaderPageProps) {
+export default function HeaderPage({ title, rightAction }: HeaderPageProps) {
   return (
     <Stack
       pb={1.5}
@@ -17,7 +17,7 @@ export default function HeaderPage({ rightAction }: HeaderPageProps) {
       justifyContent={'space-between'}
     >
       <Typographies.Title>
-        Veículos
+        {title}
       </Typographies.Title>
       {rightAction}
     </Stack>

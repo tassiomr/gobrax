@@ -2,6 +2,29 @@ import { grey, red } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: grey[200]
+        }
+      }
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          background: '#fff'
+        }
+      }
+    },
+    MuiTableCell:{ 
+      styleOverrides: {
+        root: {
+          textTransform: 'capitalize'
+        }
+      }
+    }
+  },
   palette: {
     primary: {
       main: '#f9cc11',

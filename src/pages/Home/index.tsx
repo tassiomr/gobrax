@@ -1,6 +1,6 @@
 import { Container } from "../../components";
 
-export default function Cars() {
+export default function Home() {
 
   return (
     <Container>
