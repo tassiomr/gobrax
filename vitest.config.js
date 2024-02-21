@@ -5,6 +5,9 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./vitest-setup.js'],
     environment: 'jsdom',
+    deps: {
+      inline: ['vitest-canvas-mock']
+    },
     coverage: {
       enabled: true,
       provider: 'istanbul',
