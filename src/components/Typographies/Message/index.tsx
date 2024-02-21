@@ -18,7 +18,7 @@ export default function Message(props: MessageProps) {
       variant="body1"
       component="p"
       color={theme.palette[props.status].main}
-      fontSize={'0.8em'}
+      fontSize={'1em'}
       {...props}
     />
   );

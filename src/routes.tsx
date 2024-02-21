@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import ErrorPage from './pages/Error';
 import Cars from './pages/Cars';
+import Drivers from './pages/Drivers';
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const routes = createBrowserRouter([
   {
     path: '/cars',
     element: <Cars />,
+  },
+  {
+    path: '/drivers',
+    element: <Drivers />,
   },
 ]);
 

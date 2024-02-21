@@ -53,7 +53,7 @@ describe('Message Component Test Suit', () => {
 
     const message = screen.getByText(text);
     expect(message).toHaveStyle({
-      fontSize: '0.8em',
+      fontSize: '1em',
       color: 'rgb(46, 125, 50)',
     });
   });

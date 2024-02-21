@@ -23,14 +23,7 @@ type InputProps = {
 
 const InputText = React.forwardRef((props: InputProps, ref) => {
   return (
-    <Stack
-      display="flex"
-      flexDirection={'column'}
-      spacing={1}
-      justifyContent={'flex-end'}
-      alignItems={'flex-end'}
-      width={'100%'}
-    >
+    <Stack display="flex" flexDirection={'column'} spacing={1} width={'100%'}>
       <FormLabel>{props.labelText}</FormLabel>
       <TextField
         InputProps={{
