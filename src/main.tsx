@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
-import theme from './theme';
+import theme from './ui/theme';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes';
-import { CarsContextDataProvider } from './contexts/cars.context';
+import { CarsContextDataProvider } from './app/contexts/cars.context';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
