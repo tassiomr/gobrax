@@ -31,6 +31,7 @@ export type UseDataType = {
     editCar: CarFunction;
     handleCancelAction: () => void;
     handleOpenDialog: (car?: Car) => void;
+    handleOpenAddModal: () => void;
   };
 };
 
@@ -84,6 +85,11 @@ export default function useData(): UseDataType {
     setIsOpenDialog((state) => !state);
   };
 
+  const handleOpenAddModal = () => {
+    clearStatus();
+    changeVisibleModalState(true);
+  };
+
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
@@ -93,6 +99,7 @@ export default function useData(): UseDataType {
       editCar: handleEditCar,
       handleCancelAction: clearStatus,
       handleOpenDialog,
+      handleOpenAddModal,
     },
     status: {
       isOpenModal,

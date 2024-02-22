@@ -78,7 +78,10 @@ export default function Bar() {
                   key={route}
                   route={`/${route}`}
                   label={label}
-                  isActive={compareUrl(route, pathname)}
+                  isActive={
+                    compareUrl(route, pathname) ||
+                    (pathname === '/' && route === 'drivers')
+                  }
                 />
               ))}
             {isMobile && (
@@ -115,7 +118,10 @@ export default function Bar() {
                       key={route}
                       route={`/${route}`}
                       label={label}
-                      isActive={compareUrl(route, pathname)}
+                      isActive={
+                        compareUrl(route, pathname) ||
+                        (pathname === '/' && route === 'drivers')
+                      }
                     />
                   ))}
                 </Stack>

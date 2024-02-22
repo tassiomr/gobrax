@@ -7,6 +7,8 @@ import {
   Driver,
 } from '../../../domain/models/driver.model';
 import useDrivers from '../../../app/hooks/useDrivers';
+import { Car } from '../../../domain/models/car.model';
+import useCars from '../../../app/hooks/useCars';
 
 export type DriverConstants = typeof constants.driversPage;
 export type DriverFunction = (driver: Driver) => void;
@@ -15,9 +17,10 @@ export type UseDataType = {
   data: {
     constants: DriverConstants;
     form: FormType<Driver>;
-    drivers: Array<Driver>;
+    drivers: Driver[];
     selectedDriver?: Driver | null;
     driverToDelete?: Driver | null;
+    cars: Car[];
   };
   status: {
     canShowTable: boolean;
@@ -29,12 +32,12 @@ export type UseDataType = {
     isOpenDialog: boolean;
   };
   actions: {
-    changeVisibleModalState: () => void;
     addDriver: DriverFunction;
     deleteDriver: () => void;
     editDriver: DriverFunction;
     selectDriver: DriverFunction;
     handleOpenEditModal: DriverFunction;
+    handleOpenAddModal: () => void;
     handleCancelAction: () => void;
     handleDeleteDialog: (driver?: Driver) => void;
   };
@@ -42,7 +45,6 @@ export type UseDataType = {
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
-  const [selectedDriver, setSelectedDriver] = useState<Driver | null>();
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(true);
   const [driverToDelete, setDriverToDelete] = useState<Driver | null>();
@@ -56,6 +58,8 @@ export default function useData(): UseDataType {
     editDriver,
     selectADriver,
   } = useDrivers();
+
+  const { cars } = useCars();
 
   const form = useForm<Driver, DriverZod>(DriverSchema);
 
@@ -71,12 +75,15 @@ export default function useData(): UseDataType {
   };
 
   const handleAddDriver = async (driver: Driver) => {
-    await addDriver(driver);
+    const car = cars.find((car) => car.id);
+    await addDriver({ ...driver, car });
     clearStatus();
   };
 
   const handleEditDriver = async (driver: Driver) => {
-    await editDriver(driver);
+    const car = cars.find((car) => car.id);
+    const carId = car?.id;
+    await editDriver({ ...driver, car, carId });
     clearStatus();
   };
 
@@ -97,11 +104,6 @@ export default function useData(): UseDataType {
 
   const selectDriver = (driver: Driver) => {
     selectADriver(driver);
-    if (driver.id === selectedDriver?.id) {
-      setSelectedDriver(null);
-    } else {
-      setSelectedDriver(driver);
-    }
   };
 
   const handleDeleteDialog = (driver?: Driver) => {
@@ -109,15 +111,20 @@ export default function useData(): UseDataType {
     setIsOpenDialog((state) => !state);
   };
 
+  const handleOpenAddModal = () => {
+    clearStatus();
+    changeVisibleModalState(true);
+  };
+
   return {
     actions: {
-      changeVisibleModalState: () => changeVisibleModalState((state) => !state),
       addDriver: handleAddDriver,
       deleteDriver: handleDeleteDriver,
       editDriver: handleEditDriver,
       selectDriver,
       handleCancelAction: clearStatus,
       handleOpenEditModal,
+      handleOpenAddModal,
       handleDeleteDialog,
     },
     status: {
@@ -133,8 +140,9 @@ export default function useData(): UseDataType {
       form,
       constants: constants.driversPage,
       drivers,
-      selectedDriver,
+      selectedDriver: drivers.find((driver) => driver.isSelected),
       driverToDelete,
+      cars,
     },
   };
 }

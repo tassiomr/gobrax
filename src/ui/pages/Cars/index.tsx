@@ -22,13 +22,13 @@ export default function Cars() {
   } = status;
   const { cars, form, constants, carToDelete } = data;
   const {
-    changeVisibleModalState,
     addCar,
     deleteCar,
     editCar,
     handleOpenEditModal,
     handleCancelAction,
     handleOpenDialog,
+    handleOpenAddModal,
   } = actions;
 
   return (
@@ -47,7 +47,7 @@ export default function Cars() {
         <Box p={4} sx={{ flex: 1, width: '100%' }}>
           <HeaderPage
             title={constants.title}
-            rightAction={<Buttons.Add onClick={changeVisibleModalState} />}
+            rightAction={<Buttons.Add onClick={handleOpenAddModal} />}
           />
           <Table
             editCar={handleOpenEditModal}
@@ -60,7 +60,7 @@ export default function Cars() {
       <EmptyData
         isVisible={canShowNoDataYet}
         message={constants.noDataYet}
-        buttonAction={changeVisibleModalState}
+        buttonAction={handleOpenAddModal}
       />
       <Dialog
         isOpen={isOpenDialog}

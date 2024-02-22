@@ -23,7 +23,7 @@ export const CarsContextData = createContext({} as CarsContextDataType);
 
 export function CarsContextDataProvider({ children }: { children: ReactNode }) {
   const [cars, setCars] = useState<Car[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isAddEditLoading, setIsAddEditLoading] = useState(false);
   const { open } = useSnackbar();
 
@@ -32,11 +32,13 @@ export function CarsContextDataProvider({ children }: { children: ReactNode }) {
     const resp = await create(car);
     open(resp.status as AlertColor, resp.message);
     setIsAddEditLoading(false);
+    getCars();
   };
 
   const deleteCar = async (car: Car): Promise<void> => {
     const resp = await remove(car);
     open(resp.status as AlertColor, resp.message);
+    getCars();
   };
 
   const editCar = async (car: Car): Promise<void> => {
@@ -44,6 +46,7 @@ export function CarsContextDataProvider({ children }: { children: ReactNode }) {
     const resp = await edit(car);
     open(resp.status, resp.message);
     setIsAddEditLoading(false);
+    getCars();
   };
 
   const getCars = async () => {

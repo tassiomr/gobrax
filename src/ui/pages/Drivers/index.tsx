@@ -22,15 +22,15 @@ export default function Cars() {
     isEdit,
     isOpenDialog,
   } = status;
-  const { drivers, form, constants, selectedDriver, driverToDelete } = data;
+  const { drivers, form, constants, driverToDelete, cars } = data;
   const {
-    changeVisibleModalState,
     addDriver,
     deleteDriver,
     editDriver,
     handleOpenEditModal,
     handleCancelAction,
     handleDeleteDialog,
+    handleOpenAddModal,
     selectDriver,
   } = actions;
 
@@ -44,14 +44,17 @@ export default function Cars() {
         isAddEditLoading={isAddEditLoading}
         cancelAction={handleCancelAction}
         submit={isEdit ? editDriver : addDriver}
+        cars={cars}
       />
       <Loading isVisible={isLoading} />
       {canShowTable ? (
         <Box p={4} sx={{ flex: 1, width: '100%' }}>
-          <SelectedDriver driver={selectedDriver} />
+          <SelectedDriver
+            driver={drivers.find((driver) => driver.isSelected)}
+          />
           <HeaderPage
             title={constants.title}
-            rightAction={<Buttons.Add onClick={changeVisibleModalState} />}
+            rightAction={<Buttons.Add onClick={handleOpenAddModal} />}
           />
           <Table
             editDriver={handleOpenEditModal}
@@ -65,7 +68,7 @@ export default function Cars() {
       <EmptyData
         isVisible={canShowNoDataYet}
         message={constants.noDataYet}
-        buttonAction={changeVisibleModalState}
+        buttonAction={handleOpenAddModal}
       />
       <Dialog
         isOpen={isOpenDialog}

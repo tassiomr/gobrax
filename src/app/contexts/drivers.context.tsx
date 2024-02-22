@@ -37,6 +37,7 @@ export function DriversContextDataProvider({
     const resp = await create(driver);
     open(resp.status as AlertColor, resp.message);
     setIsAddEditLoading(false);
+    getDrivers();
   };
 
   const deleteDriver = async (driver: Driver): Promise<void> => {
@@ -44,6 +45,7 @@ export function DriversContextDataProvider({
     const resp = await remove(driver);
     open(resp.status as AlertColor, resp.message);
     setIsAddEditLoading(false);
+    getDrivers();
   };
 
   const editDriver = async (driver: Driver): Promise<void> => {
@@ -51,6 +53,7 @@ export function DriversContextDataProvider({
     const resp = await edit(driver);
     open(resp.status, resp.message);
     setIsAddEditLoading(false);
+    getDrivers();
   };
 
   const getDrivers = async () => {

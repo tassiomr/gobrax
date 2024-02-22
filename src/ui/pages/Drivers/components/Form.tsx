@@ -20,6 +20,7 @@ type FormProps = {
   submit: DriverFunction;
   cancelAction: () => void;
   isEdit: boolean;
+  cars: Car[];
 };
 
 export default function Form({
@@ -30,6 +31,7 @@ export default function Form({
   cancelAction,
   isEdit,
   isOpenModal,
+  cars,
 }: FormProps) {
   const { add, edit } = constants.modal;
   const title = isEdit ? edit.title : add.title;
@@ -80,7 +82,7 @@ export default function Form({
             />
             <Select
               labelText={constants.modal.input.car}
-              options={[]}
+              options={cars}
               composeObject={(item) => {
                 const car = item as Car;
                 return { label: car.name, key: car.id!, value: car.id! };
