@@ -47,7 +47,7 @@ export default function Bar({ actionComponent }: BarProps) {
         >
           <Box flex={1} display={'flex'} gap={1}>
             {linkButtons.map(({ route, label }) => (
-              <Buttons.LinkButton
+              <Buttons.Link
                 key={route}
                 route={`/${route}`}
                 label={label}

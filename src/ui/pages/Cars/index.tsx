@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Buttons, Container, Modal } from '../../components';
+import { Buttons, Container } from '../../components';
 import useData from './car.data';
 import Form from './components/Form';
 import Table from './components/Table';
@@ -17,38 +17,38 @@ export default function Cars() {
     canShowNoDataYet,
     canShowTable,
     isAddEditLoading,
+    isEdit,
   } = status;
   const { cars, form, constants } = data;
-  const { changeVisibleModalState, addCar, deleteCar, editCar } = actions;
+  const {
+    changeVisibleModalState,
+    addCar,
+    deleteCar,
+    editCar,
+    handleOpenEditModal,
+    handleCancelAction,
+  } = actions;
 
   return (
     <Container>
-      <Modal
-        open={isOpenModal}
-        onClose={changeVisibleModalState}
-        aria-describedby={constants.modal.description}
-        aria-labelledby={constants.modal.title}
-        data-testid={'modal-add-car'}
-      >
-        <Form
-          constants={constants}
-          form={form}
-          isAddEditLoading={isAddEditLoading}
-          changeVisibleModalState={changeVisibleModalState}
-          addCar={addCar}
-        />
-      </Modal>
+      <Form
+        isOpenModal={isOpenModal}
+        isEdit={isEdit}
+        constants={constants}
+        form={form}
+        isAddEditLoading={isAddEditLoading}
+        cancelAction={handleCancelAction}
+        submit={isEdit ? editCar : addCar}
+      />
       <Loading isVisible={isLoading} />
       {canShowTable ? (
         <Box p={8} sx={{ flex: 1, width: '100%' }}>
           <HeaderPage
-            title={vm.data.constants.title}
-            rightAction={
-              <Buttons.AddButton onClick={vm.actions.changeVisibleModalState} />
-            }
+            title={constants.title}
+            rightAction={<Buttons.Add onClick={changeVisibleModalState} />}
           />
           <Table
-            editCar={editCar}
+            editCar={handleOpenEditModal}
             deleteCar={deleteCar}
             cars={cars}
             constants={constants}

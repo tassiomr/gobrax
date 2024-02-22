@@ -34,7 +34,7 @@ export default function EmptyData({
       <Typographies.Title sx={{ textAlign: 'center' }}>
         {message}
       </Typographies.Title>
-      <Buttons.AddButton onClick={buttonAction} />
+      <Buttons.Add onClick={buttonAction} />
     </Stack>
   );
 }

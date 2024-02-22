@@ -1,3 +1,3 @@
-export { default as LinkButton } from './LinkButton';
-export { default as AddButton } from './AddButton';
+export { default as Link } from './Link';
+export { default as Add } from './Add';
 export { default as Default } from './Button';

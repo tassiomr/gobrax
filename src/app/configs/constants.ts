@@ -13,8 +13,14 @@ export default {
       headers: ['Id', 'Marca', 'Placa', 'Ações'],
     },
     modal: {
-      title: 'Adiciona um novo carro',
-      description: 'Formulário que adiciona um novo carro ao sistema',
+      add: {
+        title: 'Adiciona um novo carro',
+        description: 'Formulário que adiciona um novo carro do sistema',
+      },
+      edit: {
+        title: 'Edita o carro selecionado',
+        description: 'Formulário que edita um carro do sistema',
+      },
       buttons: {
         add: 'adicionar',
         cancel: 'cancelar',
@@ -39,7 +45,7 @@ export default {
       title: 'Adiciona um novo motorista',
       description: 'Formulário que adiciona um novo motorista ao sistema',
       buttons: {
-        add: 'adicionar',
+        confirm: 'confirmar',
         cancel: 'cancelar',
       },
       input: {
@@ -52,6 +58,8 @@ export default {
   components: {
     buttons: {
       add: 'Adicionar',
+      cancel: 'Cancelar',
+      confirm: 'Confirmar',
     },
     loading: 'Carregando...',
     select: {

@@ -5,7 +5,6 @@ import { Car, CarSchema, CarZod } from '../../../domain/models/car.model';
 import useCars from '../../../app/hooks/useCars';
 
 export type CarConstants = typeof constants.carsPage;
-
 export type CarFunction = (car: Car) => void;
 
 export type UseDataType = {
@@ -20,17 +19,21 @@ export type UseDataType = {
     canShowNoDataYet: boolean;
     isLoading: boolean;
     isAddEditLoading: boolean;
+    isEdit: boolean;
   };
   actions: {
     changeVisibleModalState: () => void;
+    handleOpenEditModal: CarFunction;
     addCar: CarFunction;
     deleteCar: CarFunction;
     editCar: CarFunction;
+    handleCancelAction: () => void;
   };
 };
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
+  const [isEdit, setIsEdit] = useState(true);
 
   const { cars, addCar, deleteCar, editCar, isLoading, isAddEditLoading } =
     useCars();
@@ -40,18 +43,38 @@ export default function useData(): UseDataType {
   const canShowTable = !!cars.length && !isLoading;
   const canShowNoDataYet = cars.length === 0 && !isLoading;
 
+  const clearStatus = () => {
+    form.reset();
+    changeVisibleModalState(false);
+    setIsEdit(false);
+  };
   const handleAddCar = async (car: Car) => {
     await addCar(car);
-    changeVisibleModalState(false);
-    form.reset();
+    clearStatus();
+  };
+
+  const handleEditCar = async (car: Car) => {
+    await editCar(car);
+    clearStatus();
+  };
+
+  const handleOpenEditModal = (car: Car) => {
+    setIsEdit(true);
+    changeVisibleModalState(true);
+
+    form.setValue('id', car.name);
+    form.setValue('name', car.name);
+    form.setValue('plate', car.plate);
   };
 
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
+      handleOpenEditModal,
       addCar: handleAddCar,
       deleteCar,
-      editCar,
+      editCar: handleEditCar,
+      handleCancelAction: clearStatus,
     },
     status: {
       isOpenModal,
@@ -59,6 +82,7 @@ export default function useData(): UseDataType {
       canShowTable,
       isAddEditLoading,
       isLoading,
+      isEdit,
     },
     data: {
       form,

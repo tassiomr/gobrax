@@ -1,6 +1,6 @@
 import { Box, Stack, Divider } from '@mui/material';
 import { DirectionsCarOutlined, SubjectOutlined } from '@mui/icons-material';
-import { Typographies, Buttons, TextField } from '../../../components';
+import { Typographies, Buttons, TextField, Modal } from '../../../components';
 import { CarConstants, CarFunction } from '../car.data';
 import { FormType } from '../../../../app/hooks/useForm';
 import { Car } from '../../../../domain/models/car.model';
@@ -9,84 +9,98 @@ type FormProps = {
   form: FormType<Car>;
   constants: CarConstants;
   isAddEditLoading: boolean;
-  addCar: CarFunction;
-  changeVisibleModalState: () => void;
+  isOpenModal: boolean;
+  submit: CarFunction;
+  cancelAction: () => void;
+  isEdit: boolean;
 };
 
 export default function Form({
   form,
   constants,
   isAddEditLoading,
-  addCar,
-  changeVisibleModalState,
+  submit,
+  cancelAction,
+  isEdit,
+  isOpenModal,
 }: FormProps) {
+  const { add, edit } = constants.modal;
+  const title = isEdit ? edit.title : add.title;
+  const description = isEdit ? edit.description : add.description;
+
   return (
-    <Stack
-      border={'none'}
-      borderRadius={2}
-      width={'auto'}
-      minWidth={'40%'}
-      height={'auto'}
-      minHeight={'50%'}
-      sx={{ background: 'white', padding: 4 }}
+    <Modal
+      open={isOpenModal}
+      onClose={cancelAction}
+      aria-describedby={description}
+      aria-labelledby={title}
+      data-testid={'modal-add-car'}
     >
-      <Stack mb={6}>
-        <Typographies.Title>{constants.modal.title}</Typographies.Title>
-        <Typographies.Description>
-          {constants.modal.description}
-        </Typographies.Description>
-      </Stack>
       <Stack
-        component="form"
-        spacing={2}
-        justifyContent={'flex-end'}
-        direction={'column'}
-        onSubmit={form.handleSubmit(addCar)}
+        border={'none'}
+        borderRadius={2}
+        width={'auto'}
+        minWidth={'40%'}
+        height={'auto'}
+        minHeight={'50%'}
+        sx={{ background: 'white', padding: 4 }}
       >
-        <Stack spacing={2} justifyContent={'flex-end'} direction={'column'}>
-          <TextField
-            data-testid="input-car-name"
-            {...form.register('name')}
-            labelText={constants.modal.input.name}
-            icon={<DirectionsCarOutlined />}
-            error={!!form.formState.errors.name}
-            errorText={form.formState.errors.name?.message}
-          />
-          <TextField
-            data-testid="input-car-plate"
-            {...form.register('plate')}
-            labelText={constants.modal.input.plate}
-            icon={<SubjectOutlined />}
-            error={!!form.formState.errors.plate}
-            errorText={form.formState.errors.plate?.message}
-          />
+        <Stack mb={6}>
+          <Typographies.Title>{title}</Typographies.Title>
+          <Typographies.Description>{description}</Typographies.Description>
         </Stack>
-        <Box component="div" p={1} />
-        <Divider />
         <Stack
-          direction={'row'}
-          justifyContent={'flex-end'}
-          useFlexGap
+          component="form"
           spacing={2}
+          justifyContent={'flex-end'}
+          direction={'column'}
+          onSubmit={form.handleSubmit(submit)}
         >
-          <Buttons.Default
-            onClick={changeVisibleModalState}
-            variant="outlined"
-            color="info"
+          <Stack spacing={2} justifyContent={'flex-end'} direction={'column'}>
+            <TextField
+              data-testid="input-car-name"
+              {...form.register('name')}
+              labelText={constants.modal.input.name}
+              icon={<DirectionsCarOutlined />}
+              error={!!form.formState.errors.name}
+              errorText={form.formState.errors.name?.message}
+            />
+            <TextField
+              data-testid="input-car-plate"
+              {...form.register('plate')}
+              labelText={constants.modal.input.plate}
+              icon={<SubjectOutlined />}
+              error={!!form.formState.errors.plate}
+              errorText={form.formState.errors.plate?.message}
+            />
+          </Stack>
+          <Box component="div" p={1} />
+          <Divider />
+          <Stack
+            direction={'row'}
+            justifyContent={'flex-end'}
+            useFlexGap
+            spacing={2}
           >
-            {constants.modal.buttons.cancel}
-          </Buttons.Default>
-          <Buttons.Default
-            isLoading={isAddEditLoading}
-            variant="contained"
-            color="info"
-            disabled={!form.formState.isDirty || !form.formState.isValid}
-            type="submit"
-          >
-            {constants.modal.buttons.add}
-          </Buttons.Default>
+            <Buttons.Default
+              onClick={cancelAction}
+              variant="outlined"
+              color="info"
+            >
+              {constants.modal.buttons.cancel}
+            </Buttons.Default>
+            <Buttons.Default
+              isLoading={isAddEditLoading}
+              variant="contained"
+              color="info"
+              disabled={!form.formState.isDirty || !form.formState.isValid}
+              type="submit"
+            >
+              {constants.modal.buttons.confirm}
+            </Buttons.Default>
+          </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    </Modal>
   );
 }

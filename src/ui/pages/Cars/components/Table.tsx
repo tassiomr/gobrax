@@ -31,7 +31,7 @@ export default function TableCar({
       renderCell={(item: Car) => {
         return (
           <TableRow
-            key={item.plate}
+            key={item.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell align="center" component="th" scope="row">

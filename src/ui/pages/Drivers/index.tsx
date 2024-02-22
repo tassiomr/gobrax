@@ -52,7 +52,7 @@ export default function Drivers() {
           <HeaderPage
             title={vm.data.constants.title}
             rightAction={
-              <Buttons.AddButton onClick={vm.actions.changeVisibleModalState} />
+              <Buttons.Add onClick={vm.actions.changeVisibleModalState} />
             }
           />
           <Table

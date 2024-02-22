@@ -1,11 +1,11 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
-import AddButton from '.';
+import Confirm from '.';
 import { WrapperTestUtils } from '../../../../__test__/utils/wrapper';
 
-describe('AddButton Component Tests', () => {
+describe('Confirm Button Component Suit Test', () => {
   beforeEach(() => {
-    render(<AddButton />, { wrapper: WrapperTestUtils });
+    render(<Confirm />, { wrapper: WrapperTestUtils });
   });
 
   afterAll(() => {
@@ -13,7 +13,7 @@ describe('AddButton Component Tests', () => {
   });
 
   it('renders button with correct text', () => {
-    const button = screen.getByText('Adicionar');
+    const button = screen.getByText('Confirmar');
     expect(button).toBeInTheDocument();
   });
 
@@ -23,7 +23,7 @@ describe('AddButton Component Tests', () => {
   });
 
   it('renders button with correct styles', () => {
-    const button = screen.getByText('Adicionar');
+    const button = screen.getByText('Confirmar');
     expect(button).toHaveStyle({
       color: 'rgba(0, 0, 0, 0.87)',
       backgroundColor: 'rgb(174, 142, 11)',
