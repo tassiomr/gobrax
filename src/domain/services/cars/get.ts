@@ -4,7 +4,7 @@ import formatBackendData from '../data';
 
 export default async function get(): Promise<ReturnFunction<Car[]>> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return formatBackendData<Car[]>(200, 'Veículo atualizado com sucesso!', [
       {
         id: 'a809808080991',

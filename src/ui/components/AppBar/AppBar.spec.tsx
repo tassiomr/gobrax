@@ -5,9 +5,7 @@ import Bar from '.';
 
 describe('Bar Component Test Suit', () => {
   beforeEach(() => {
-    const ActionComponent = () => <button>Click me</button>;
-
-    render(<Bar actionComponent={<ActionComponent />} />, {
+    render(<Bar />, {
       wrapper: WrapperTestUtils,
     });
   });
@@ -27,10 +25,5 @@ describe('Bar Component Test Suit', () => {
   it('correctly renders the logo', () => {
     const logo = screen.getByAltText('Logo da aplicação');
     expect(logo).toBeInTheDocument();
-  });
-
-  it('correctly renders the action component', () => {
-    const actionButton = screen.getByRole('button', { name: /click me/i });
-    expect(actionButton).toBeInTheDocument();
   });
 });

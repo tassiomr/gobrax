@@ -15,7 +15,7 @@ export default {
     modal: {
       add: {
         title: 'Adiciona um novo carro',
-        description: 'Formulário que adiciona um novo carro do sistema',
+        description: 'Formulário que adiciona um novo carro no sistema',
       },
       edit: {
         title: 'Edita o carro selecionado',
@@ -42,8 +42,14 @@ export default {
       },
     },
     modal: {
-      title: 'Adiciona um novo motorista',
-      description: 'Formulário que adiciona um novo motorista ao sistema',
+      add: {
+        title: 'Adiciona um novo motorista',
+        description: 'Formulário que adiciona um novo motorista no sistema',
+      },
+      edit: {
+        title: 'Edita o carro selecionado',
+        description: 'Formulário que edita um carro do sistema',
+      },
       buttons: {
         confirm: 'confirmar',
         cancel: 'cancelar',

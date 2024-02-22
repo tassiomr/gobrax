@@ -8,13 +8,16 @@ import { RouterProvider } from 'react-router-dom';
 import router from './routes';
 import { CarsContextDataProvider } from './app/contexts/cars.context';
 import { SnackBarDataProvider } from './app/contexts/snackbar.context';
+import { DriversContextDataProvider } from './app/contexts/drivers.context';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <SnackBarDataProvider>
         <CarsContextDataProvider>
-          <RouterProvider router={router} />
+          <DriversContextDataProvider>
+            <RouterProvider router={router} />
+          </DriversContextDataProvider>
         </CarsContextDataProvider>
         <CssBaseline />
       </SnackBarDataProvider>

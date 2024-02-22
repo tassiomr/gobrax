@@ -11,6 +11,10 @@
     "coverage": "vitest run --coverage",
     "vitest:ui": "vitest --ui",
     "cypress:open": "cypress open",
+    "cy:open-e2e": "cypress open --e2e --browser chrome",
+    "cy:run-e2e": "cypress run --e2e --browser chrome",
+    "cy:run-ct-fast": "yarn cy:run-ct --config video=false screenshot=false",
+    "cy:open": "cypress open",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {

@@ -82,7 +82,11 @@ export default function useData(): UseDataType {
   };
 
   const selectDriver = (driver: Driver) => {
-    setSelectedDriver(driver);
+    if (driver.id === selectedDriver?.id) {
+      setSelectedDriver(undefined);
+    } else {
+      setSelectedDriver(driver);
+    }
   };
 
   return {

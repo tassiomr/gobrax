@@ -10,7 +10,7 @@ export const DriverSchema = z.object({
     .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'Este não é um documento válido.'),
   carId: z.string().optional(),
   lastUpdate: z.date().optional(),
-  isSelected: z.boolean().default(false),
+  isSelected: z.boolean().optional().default(false),
   car: CarSchema.optional().nullable(),
 });
 

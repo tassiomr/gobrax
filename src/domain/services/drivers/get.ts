@@ -12,8 +12,8 @@ export default async function get(): Promise<ReturnFunction<Driver[]>> {
         document: '123.456.789-00',
         car: {
           id: '001',
-          marca: 'Chevrolet',
-          placa: 'ABC-1234',
+          name: 'Chevrolet',
+          plate: 'ABC-1234',
         },
       },
       {
@@ -27,8 +27,8 @@ export default async function get(): Promise<ReturnFunction<Driver[]>> {
         document: '456.789.123-00',
         car: {
           id: '002',
-          marca: 'Ford',
-          placa: 'DEF-5678',
+          name: 'Ford',
+          plate: 'DEF-5678',
         },
       },
       {
@@ -37,8 +37,8 @@ export default async function get(): Promise<ReturnFunction<Driver[]>> {
         document: '111.222.333-44',
         car: {
           id: '003',
-          marca: 'Volkswagen',
-          placa: 'GHI-9012',
+          name: 'Volkswagen',
+          plate: 'GHI-9012',
         },
       },
       {
