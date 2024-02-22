@@ -3,7 +3,7 @@ import { Driver } from '../../../../domain/models/driver.model';
 import { Typographies } from '../../../components';
 
 type SelectedDriverProps = {
-  driver?: Driver;
+  driver?: Driver | null;
 };
 
 export default function SelectedDriver({ driver }: SelectedDriverProps) {

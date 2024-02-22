@@ -25,6 +25,7 @@
     "@mui/material": "^5.15.10",
     "@testing-library/cypress": "^10.0.1",
     "@types/mocha": "^10.0.6",
+    "axios": "^1.6.7",
     "cypress": "^13.6.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",

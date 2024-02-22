@@ -3,7 +3,7 @@ import { Buttons } from '..';
 
 type ActionsProps = {
   cancelAction: () => void;
-  confirmAction: () => void;
+  confirmAction?: () => void;
   disabled: boolean;
   isLoading: boolean;
 };
