@@ -1,6 +1,11 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Car } from '../../domain/models/car.model';
 import useSnackbar from '../hooks/useSnackbar';
+import create from '../../domain/services/cars/create';
+import { AlertColor } from '@mui/material';
+import remove from '../../domain/services/cars/remove';
+import get from '../../domain/services/cars/get';
+import edit from '../../domain/services/cars/edit';
 
 type CarFunction = (car: Car) => Promise<void>;
 
@@ -20,36 +25,33 @@ export function CarsContextDataProvider({ children }: { children: ReactNode }) {
   const [cars, setCars] = useState<Car[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isAddEditLoading, setIsAddEditLoading] = useState(false);
+  const { open } = useSnackbar();
 
   const addCar = async (car: Car): Promise<void> => {
-    console.log(car);
+    setIsAddEditLoading(true);
+    const resp = await create(car);
+    open(resp.status as AlertColor, resp.message);
+    setIsAddEditLoading(false);
   };
 
   const deleteCar = async (car: Car): Promise<void> => {
-    console.log(car);
+    const resp = await remove(car);
+    open(resp.status as AlertColor, resp.message);
   };
 
   const editCar = async (car: Car): Promise<void> => {
     setIsAddEditLoading(true);
-    console.log(car);
+    const resp = await edit(car);
+    open(resp.status, resp.message);
     setIsAddEditLoading(false);
   };
 
   const getCars = async () => {
-    try {
-      setIsLoading(true);
-      setCars([
-        {
-          id: 'fdsfdsfds',
-          name: 'Fiat',
-          plate: 'ABC-1234',
-        },
-      ]);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    const resp = await get();
+    if (resp.data) setCars(resp.data);
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
