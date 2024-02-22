@@ -22,7 +22,7 @@ export default {
         description: 'Formulário que edita um carro do sistema',
       },
       buttons: {
-        add: 'adicionar',
+        confirm: 'confirmar',
         cancel: 'cancelar',
       },
       input: {

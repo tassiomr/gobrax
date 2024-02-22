@@ -1,7 +1,8 @@
 import { z } from 'zod';
+import { CarSchema } from './car.model';
 
 export const DriverSchema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string().optional(),
   name: z.string().min(3, 'O nome é obrigatório'),
   document: z
     .string()
@@ -10,6 +11,7 @@ export const DriverSchema = z.object({
   carId: z.string().optional(),
   lastUpdate: z.date().optional(),
   isSelected: z.boolean().default(false),
+  car: CarSchema.optional().nullable(),
 });
 
 export type Driver = z.infer<typeof DriverSchema>;
