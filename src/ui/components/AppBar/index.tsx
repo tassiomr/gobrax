@@ -1,26 +1,49 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react';
-import { AppBar, Toolbar, Box } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  styled,
+  useMediaQuery,
+  Drawer,
+  Stack,
+} from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import { Buttons } from '..';
 import constants from '../../../app/configs/constants';
 import { Route } from '../../../domain/types/routes';
 import { compareUrl } from '../../../app/utils';
-
-type BarProps = {
-  actionComponent?: ReactNode;
-};
+import { MenuRounded } from '@mui/icons-material';
 
 type LinkButton = {
   label: string;
   route: Route;
 };
 
-export default function Bar({ actionComponent }: BarProps) {
+const LogoHeader = styled(Box)({
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  display: 'flex',
+  padding: 8,
+});
+
+const LogoDrawer = styled(LogoHeader)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+    justifyContent: 'center',
+    width: 200,
+    height: 100,
+    padding: 0,
+  },
+}));
+
+export default function Bar() {
   const { routes } = constants.appConfig;
   const [linkButtons, setLinkButtons] = useState<Array<LinkButton>>([]);
   const { pathname } = useLocation();
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const createLinkButtons = useCallback(() => {
     const keys = Object.keys(routes);
 
@@ -42,45 +65,63 @@ export default function Bar({ actionComponent }: BarProps) {
         <Box
           display="flex"
           justifyContent="space-between"
-          alignItems={'center'}
-          width={'100%'}
+          alignItems="center"
+          width="100%"
         >
-          <Box flex={1} display={'flex'} gap={1}>
-            {linkButtons.map(({ route, label }) => (
-              <Buttons.Link
-                key={route}
-                route={`/${route}`}
-                label={label}
-                isActive={compareUrl(route, pathname)}
-              />
-            ))}
+          <Box flex={1} display="flex" gap={1}>
+            {!isMobile &&
+              linkButtons.map(({ route, label }) => (
+                <Buttons.Link
+                  key={route}
+                  route={`/${route}`}
+                  label={label}
+                  isActive={compareUrl(route, pathname)}
+                />
+              ))}
+            {isMobile && (
+              <Box p={2}>
+                <MenuRounded
+                  data-testid="mobile-menu-icon"
+                  fontSize="large"
+                  onClick={() => {
+                    setIsDrawerOpen(true);
+                  }}
+                />
+              </Box>
+            )}
+            {isMobile && (
+              <Drawer
+                elevation={0}
+                anchor={'left'}
+                open={isDrawerOpen}
+                onClose={() => {
+                  setIsDrawerOpen(false);
+                }}
+              >
+                <Stack px={4} py={4}>
+                  <LogoDrawer>
+                    <img
+                      width="50%"
+                      height="25%"
+                      src={Logo}
+                      alt="Logo da aplicação"
+                    />
+                  </LogoDrawer>
+                  {linkButtons.map(({ route, label }) => (
+                    <Buttons.NavLink
+                      key={route}
+                      route={`/${route}`}
+                      label={label}
+                      isActive={compareUrl(route, pathname)}
+                    />
+                  ))}
+                </Stack>
+              </Drawer>
+            )}
           </Box>
-          <Box
-            display={'flex'}
-            flex={1}
-            justifyContent={'center'}
-            alignItems={'center'}
-          >
-            <Link
-              to="/"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <img
-                width="50%"
-                height="25%"
-                src={Logo}
-                alt="Logo da aplicação"
-              />
-            </Link>
-          </Box>
-          <Box sx={{ pl: 8 }} flex={1} display="flex" justifyContent="flex-end">
-            {actionComponent}
-          </Box>
+          <LogoHeader>
+            <img width="50%" height="25%" src={Logo} alt="Logo da aplicação" />
+          </LogoHeader>
         </Box>
       </Toolbar>
     </AppBar>
