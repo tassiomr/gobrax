@@ -32,7 +32,7 @@ export default function TableDriver({
       data={drivers}
       renderCell={(item) => {
         const driver = item as Driver;
-
+        console.log(driver);
         return (
           <TableRow
             key={driver.id}
@@ -40,6 +40,7 @@ export default function TableDriver({
           >
             <TableCell align="center" component="th" scope="row">
               <Checkbox
+                key={driver.id}
                 checked={driver.isSelected}
                 onChange={() => {
                   selectDriver(driver);

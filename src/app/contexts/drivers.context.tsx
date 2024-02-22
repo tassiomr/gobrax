@@ -14,6 +14,7 @@ type DriversContextDataType = {
   deleteDriver: DriverFunction;
   editDriver: DriverFunction;
   getDrivers: () => Promise<void>;
+  selectADriver: DriverFunction;
   drivers: Driver[];
   isAddEditLoading: boolean;
   isLoading: boolean;
@@ -58,6 +59,24 @@ export function DriversContextDataProvider({
     setIsLoading(false);
   };
 
+  const selectADriver = (selectedDriver: Driver) => {
+    setDrivers((prevDrivers) =>
+      prevDrivers.map((driver) => {
+        if (driver === selectedDriver) {
+          return {
+            ...driver,
+            isSelected: !driver.isSelected,
+          };
+        }
+
+        return {
+          ...driver,
+          isSelected: false,
+        };
+      }),
+    );
+  };
+
   useEffect(() => {
     getDrivers();
   }, []);
@@ -72,6 +91,7 @@ export function DriversContextDataProvider({
         getDrivers,
         isLoading,
         isAddEditLoading,
+        selectADriver,
       }}
     >
       {children}

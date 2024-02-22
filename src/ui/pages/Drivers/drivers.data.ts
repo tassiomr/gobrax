@@ -49,6 +49,7 @@ export default function useData(): UseDataType {
     addDriver,
     deleteDriver,
     editDriver,
+    selectADriver,
   } = useDrivers();
 
   const form = useForm<Driver, DriverZod>(DriverSchema);
@@ -62,26 +63,28 @@ export default function useData(): UseDataType {
     setIsEdit(false);
   };
 
-  const handleAddDriver = async (car: Driver) => {
-    await addDriver(car);
+  const handleAddDriver = async (driver: Driver) => {
+    await addDriver(driver);
     clearStatus();
   };
 
-  const handleEditDriver = async (car: Driver) => {
-    await editDriver(car);
+  const handleEditDriver = async (driver: Driver) => {
+    await editDriver(driver);
     clearStatus();
   };
 
-  const handleOpenEditModal = (car: Driver) => {
+  const handleOpenEditModal = (driver: Driver) => {
     setIsEdit(true);
     changeVisibleModalState(true);
 
-    form.setValue('id', car.name);
-    form.setValue('name', car.name);
-    form.setValue('carId', car.car?.id || '');
+    form.setValue('id', driver.id);
+    form.setValue('name', driver.name);
+    form.setValue('document', driver.document);
+    form.setValue('carId', driver.car?.id || '');
   };
 
   const selectDriver = (driver: Driver) => {
+    selectADriver(driver);
     if (driver.id === selectedDriver?.id) {
       setSelectedDriver(undefined);
     } else {
