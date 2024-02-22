@@ -20,7 +20,7 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          textTransform: 'capitalize',
+          textTransform: 'uppercase',
         },
       },
     },
