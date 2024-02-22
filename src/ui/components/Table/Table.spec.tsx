@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Table from '.';
+import { Car } from '../../../domain/models/car.model';
 
 describe('Table Component Test Suit', () => {
   const data = [
@@ -29,11 +30,11 @@ describe('Table Component Test Suit', () => {
       <Table
         data={data}
         headers={headers}
-        renderCell={(item) => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.marca}</td>
-            <td>{item.plate}</td>
+        renderCell={(item: Car) => (
+          <tr key={item?.id}>
+            <td>{item?.id}</td>
+            <td>{item?.name}</td>
+            <td>{item?.plate}</td>
           </tr>
         )}
         ariaLabel="Table"

@@ -1,26 +1,22 @@
-import { Container as MContainer } from '@mui/material';
+import { Container as MUIContainer } from '@mui/material';
 import { ReactNode } from 'react';
 import AppBar from '../AppBar';
 import Snackbar from '../Snackbar';
 
 type ContainerProps = {
   children: ReactNode;
-  headerActionComponent?: ReactNode;
 };
 
-export default function Container({
-  children,
-  headerActionComponent,
-}: ContainerProps) {
+export default function Container({ children }: ContainerProps) {
   return (
-    <MContainer
+    <MUIContainer
       maxWidth={false}
       disableGutters
-      sx={{ width: '100%', margin: 0, height: '100vh' }}
+      sx={{ width: '100%', margin: 0, minHeight: '100vh', height: 'auto' }}
     >
-      <AppBar actionComponent={headerActionComponent} />
+      <AppBar />
       {children}
       <Snackbar />
-    </MContainer>
+    </MUIContainer>
   );
 }

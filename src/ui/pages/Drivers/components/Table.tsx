@@ -54,7 +54,7 @@ export default function TableDriver({
               {item.document}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.carId
+              {item.car?.id
                 ? constants.table.vinculed.yes
                 : constants.table.vinculed.no}
             </TableCell>

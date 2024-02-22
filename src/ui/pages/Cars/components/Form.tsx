@@ -1,6 +1,6 @@
 import { Box, Stack, Divider } from '@mui/material';
 import { DirectionsCarOutlined, SubjectOutlined } from '@mui/icons-material';
-import { Typographies, Buttons, TextField, Modal } from '../../../components';
+import { Typographies, TextField, Modal, Actions } from '../../../components';
 import { CarConstants, CarFunction } from '../car.data';
 import { FormType } from '../../../../app/hooks/useForm';
 import { Car } from '../../../../domain/models/car.model';
@@ -76,29 +76,11 @@ export default function Form({
           </Stack>
           <Box component="div" p={1} />
           <Divider />
-          <Stack
-            direction={'row'}
-            justifyContent={'flex-end'}
-            useFlexGap
-            spacing={2}
-          >
-            <Buttons.Default
-              onClick={cancelAction}
-              variant="outlined"
-              color="info"
-            >
-              {constants.modal.buttons.cancel}
-            </Buttons.Default>
-            <Buttons.Default
-              isLoading={isAddEditLoading}
-              variant="contained"
-              color="info"
-              disabled={!form.formState.isDirty || !form.formState.isValid}
-              type="submit"
-            >
-              {constants.modal.buttons.confirm}
-            </Buttons.Default>
-          </Stack>
+          <Actions
+            isLoading={isAddEditLoading}
+            disabled={!form.formState.isDirty || !form.formState.isValid}
+            cancelAction={cancelAction}
+          />
         </Stack>
       </Stack>
     </Modal>

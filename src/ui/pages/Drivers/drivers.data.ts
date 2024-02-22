@@ -6,6 +6,7 @@ import {
   DriverSchema,
   Driver,
 } from '../../../domain/models/driver.model';
+import useDrivers from '../../../app/hooks/useDrivers';
 
 export type DriverConstants = typeof constants.driversPage;
 export type DriverFunction = (driver: Driver) => void;
@@ -22,7 +23,8 @@ export type UseDataType = {
     isOpenModal: boolean;
     canShowNoDataYet: boolean;
     isLoading: boolean;
-    isAddingDriver: boolean;
+    isAddEditLoading: boolean;
+    isEdit: boolean;
   };
   actions: {
     changeVisibleModalState: () => void;
@@ -30,75 +32,76 @@ export type UseDataType = {
     deleteDriver: DriverFunction;
     editDriver: DriverFunction;
     selectDriver: DriverFunction;
+    handleOpenEditModal: DriverFunction;
+    handleCancelAction: () => void;
   };
 };
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
-  const [isLoading] = useState(false);
-  const [isAddingDriver] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState<Driver>();
+  const [isEdit, setIsEdit] = useState(true);
 
-  const [drivers, setDrivers] = useState<Array<Driver>>([]);
+  const {
+    drivers,
+    isLoading,
+    isAddEditLoading,
+    addDriver,
+    deleteDriver,
+    editDriver,
+  } = useDrivers();
 
   const form = useForm<Driver, DriverZod>(DriverSchema);
 
   const canShowTable = !!drivers.length && !isLoading;
   const canShowNoDataYet = drivers.length === 0 && !isLoading;
 
-  const addDriver = (driver: Driver) => {
-    console.log(driver);
-    setDrivers((state) => {
-      const oldState = Object.assign([], state);
-      oldState.push({ id: Date.now().toString(), ...driver });
-
-      return oldState;
-    });
-
+  const clearStatus = () => {
     form.reset();
-    changeVisibleModalState((state) => !state);
+    changeVisibleModalState(false);
+    setIsEdit(false);
   };
 
-  const deleteDriver = (driver: Driver) => {
-    setDrivers((state) => state.filter((sDriver) => sDriver.id !== driver.id));
+  const handleAddDriver = async (car: Driver) => {
+    await addDriver(car);
+    clearStatus();
   };
 
-  const editDriver = (driver: Driver) => {
-    console.log(driver);
+  const handleEditDriver = async (car: Driver) => {
+    await editDriver(car);
+    clearStatus();
+  };
+
+  const handleOpenEditModal = (car: Driver) => {
+    setIsEdit(true);
+    changeVisibleModalState(true);
+
+    form.setValue('id', car.name);
+    form.setValue('name', car.name);
+    form.setValue('carId', car.car?.id || '');
   };
 
   const selectDriver = (driver: Driver) => {
-    setDrivers((prevDrivers) =>
-      prevDrivers.map((prevDriver) => {
-        if (prevDriver.id === driver.id) {
-          driver.isSelected = !driver.isSelected;
-          if (driver.isSelected) {
-            setSelectedDriver(driver);
-          } else {
-            setSelectedDriver(undefined);
-          }
-          return driver;
-        }
-
-        return { ...prevDriver, isSelected: false };
-      }),
-    );
+    setSelectedDriver(driver);
   };
 
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
-      addDriver,
+      addDriver: handleAddDriver,
       deleteDriver,
-      editDriver,
+      editDriver: handleEditDriver,
       selectDriver,
+      handleCancelAction: clearStatus,
+      handleOpenEditModal,
     },
     status: {
       isOpenModal,
       canShowNoDataYet,
       canShowTable,
-      isAddingDriver,
+      isEdit,
       isLoading,
+      isAddEditLoading,
     },
     data: {
       form,

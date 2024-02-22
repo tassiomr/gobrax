@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { Buttons, Container } from '../../components';
 import useData from './car.data';
 import Form from './components/Form';
@@ -31,35 +31,37 @@ export default function Cars() {
 
   return (
     <Container>
-      <Form
-        isOpenModal={isOpenModal}
-        isEdit={isEdit}
-        constants={constants}
-        form={form}
-        isAddEditLoading={isAddEditLoading}
-        cancelAction={handleCancelAction}
-        submit={isEdit ? editCar : addCar}
-      />
-      <Loading isVisible={isLoading} />
-      {canShowTable ? (
-        <Box p={8} sx={{ flex: 1, width: '100%' }}>
-          <HeaderPage
-            title={constants.title}
-            rightAction={<Buttons.Add onClick={changeVisibleModalState} />}
-          />
-          <Table
-            editCar={handleOpenEditModal}
-            deleteCar={deleteCar}
-            cars={cars}
-            constants={constants}
-          />
-        </Box>
-      ) : null}
-      <EmptyData
-        isVisible={canShowNoDataYet}
-        message={constants.noDataYet}
-        buttonAction={changeVisibleModalState}
-      />
+      <Stack>
+        <Form
+          isOpenModal={isOpenModal}
+          isEdit={isEdit}
+          constants={constants}
+          form={form}
+          isAddEditLoading={isAddEditLoading}
+          cancelAction={handleCancelAction}
+          submit={isEdit ? editCar : addCar}
+        />
+        <Loading isVisible={isLoading} />
+        {canShowTable ? (
+          <Box p={8} sx={{ flex: 1, width: '100%' }}>
+            <HeaderPage
+              title={constants.title}
+              rightAction={<Buttons.Add onClick={changeVisibleModalState} />}
+            />
+            <Table
+              editCar={handleOpenEditModal}
+              deleteCar={deleteCar}
+              cars={cars}
+              constants={constants}
+            />
+          </Box>
+        ) : null}
+        <EmptyData
+          isVisible={canShowNoDataYet}
+          message={constants.noDataYet}
+          buttonAction={changeVisibleModalState}
+        />
+      </Stack>
     </Container>
   );
 }
