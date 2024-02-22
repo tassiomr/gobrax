@@ -28,29 +28,30 @@ export default function TableCar({
       ariaLabel="Tabela de veículos"
       headers={constants.table.headers}
       data={cars}
-      renderCell={(item: Car) => {
+      renderCell={(item) => {
+        const car = item as Car;
         return (
           <TableRow
-            key={item.id}
+            key={car.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell align="center" component="th" scope="row">
-              {item.id}
+              {car.id}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.name}
+              {car.name}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.plate}
+              {car.plate}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
               <DeleteOutlineOutlined
-                onClick={() => deleteCar(item)}
+                onClick={() => deleteCar(car)}
                 sx={iconStyle}
                 aria-label="Deletar veículo"
               />
               <EditOutlined
-                onClick={() => editCar(item)}
+                onClick={() => editCar(car)}
                 sx={iconStyle}
                 aria-label="Editar veículo"
               />

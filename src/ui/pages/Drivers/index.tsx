@@ -44,7 +44,7 @@ export default function Cars() {
       />
       <Loading isVisible={isLoading} />
       {canShowTable ? (
-        <Box p={8} sx={{ flex: 1, width: '100%' }}>
+        <Box p={4} sx={{ flex: 1, width: '100%' }}>
           <SelectedDriver driver={selectedDriver} />
           <HeaderPage
             title={constants.title}

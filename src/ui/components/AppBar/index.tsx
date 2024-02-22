@@ -15,6 +15,7 @@ import constants from '../../../app/configs/constants';
 import { Route } from '../../../domain/types/routes';
 import { compareUrl } from '../../../app/utils';
 import { MenuRounded } from '@mui/icons-material';
+import { Theme } from '../../theme';
 
 type LinkButton = {
   label: string;
@@ -41,7 +42,9 @@ export default function Bar() {
   const { routes } = constants.appConfig;
   const [linkButtons, setLinkButtons] = useState<Array<LinkButton>>([]);
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md'),
+  );
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const createLinkButtons = useCallback(() => {

@@ -30,42 +30,44 @@ export default function TableDriver({
       ariaLabel="Tabela de motoristas"
       headers={constants.table.headers}
       data={drivers}
-      renderCell={(item: Driver) => {
+      renderCell={(item) => {
+        const driver = item as Driver;
+
         return (
           <TableRow
-            key={item.id}
+            key={driver.id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell align="center" component="th" scope="row">
               <Checkbox
-                checked={item.isSelected}
+                checked={driver.isSelected}
                 onChange={() => {
-                  selectDriver(item);
+                  selectDriver(driver);
                 }}
               />
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.id}
+              {driver.id}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.name}
+              {driver.name}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.document}
+              {driver.document}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
-              {item.car?.id
+              {driver.car?.id
                 ? constants.table.vinculed.yes
                 : constants.table.vinculed.no}
             </TableCell>
             <TableCell align="center" component="th" scope="row">
               <DeleteOutlineOutlined
-                onClick={() => deleteDriver(item)}
+                onClick={() => deleteDriver(driver)}
                 sx={iconStyle}
                 aria-label="Deletar veículo"
               />
               <EditOutlined
-                onClick={() => editDriver(item)}
+                onClick={() => editDriver(driver)}
                 sx={iconStyle}
                 aria-label="Editar veículo"
               />
