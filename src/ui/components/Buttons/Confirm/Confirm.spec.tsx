@@ -5,7 +5,7 @@ import { WrapperTestUtils } from '../../../../__test__/utils/wrapper';
 
 describe('Confirm Button Component Suit Test', () => {
   beforeEach(() => {
-    render(<Confirm />, { wrapper: WrapperTestUtils });
+    render(<Confirm isLoading={false} />, { wrapper: WrapperTestUtils });
   });
 
   afterAll(() => {

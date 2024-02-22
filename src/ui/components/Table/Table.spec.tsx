@@ -30,13 +30,16 @@ describe('Table Component Test Suit', () => {
       <Table
         data={data}
         headers={headers}
-        renderCell={(item: Car) => (
-          <tr key={item?.id}>
-            <td>{item?.id}</td>
-            <td>{item?.name}</td>
-            <td>{item?.plate}</td>
-          </tr>
-        )}
+        renderCell={(car) => {
+          const item = car as Car;
+          return (
+            <tr key={item?.id}>
+              <td>{item?.id}</td>
+              <td>{item?.name}</td>
+              <td>{item?.plate}</td>
+            </tr>
+          );
+        }}
         ariaLabel="Table"
       />,
     );

@@ -1,5 +1,4 @@
 import { Stack, Box } from '@mui/material';
-import { Car } from '../../../../domain/models/car.model';
 import { Driver } from '../../../../domain/models/driver.model';
 import { Typographies } from '../../../components';
 

@@ -25,6 +25,7 @@ export default function LinkButton({
       variant={style.variant}
       color={style.color}
       disableElevation
+      //@ts-expect-error: MUI dont recognize type Link
       component={Link}
       to={route}
     >

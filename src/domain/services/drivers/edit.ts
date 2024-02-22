@@ -6,7 +6,8 @@ export default async function edit(driver: Driver): Promise<ReturnFunction> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return formatBackendData(200, 'Motorista atualizado com sucesso!', driver);
-  } catch (error: any) {
-    return formatBackendData(error?.statusCode || 500, error?.message);
+  } catch (error) {
+    const err = error as { statusCode: number; message: string };
+    return formatBackendData(err?.statusCode || 500, err?.message);
   }
 }

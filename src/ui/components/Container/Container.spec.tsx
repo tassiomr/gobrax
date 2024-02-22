@@ -5,10 +5,8 @@ import { WrapperTestUtils } from '../../../__test__/utils/wrapper';
 
 describe('Container Component Test Suit', () => {
   beforeEach(() => {
-    const button = <button data-testid="header-action">action</button>;
-
     render(
-      <Container headerActionComponent={button}>
+      <Container>
         <div data-testid="children"></div>
       </Container>,
       { wrapper: WrapperTestUtils },

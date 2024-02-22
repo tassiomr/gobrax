@@ -5,7 +5,7 @@ import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import theme from './ui/theme';
 import { RouterProvider } from 'react-router-dom';
-import router from './routes';
+import router from './app/routes';
 import { CarsContextDataProvider } from './app/contexts/cars.context';
 import { SnackBarDataProvider } from './app/contexts/snackbar.context';
 import { DriversContextDataProvider } from './app/contexts/drivers.context';

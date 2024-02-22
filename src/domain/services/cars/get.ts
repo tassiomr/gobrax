@@ -27,7 +27,8 @@ export default async function get(): Promise<ReturnFunction<Car[]>> {
         plate: 'ABC-1234',
       },
     ]);
-  } catch (error: any) {
-    return formatBackendData(error?.statusCode || 500, error?.message);
+  } catch (error) {
+    const err = error as { statusCode: number; message: string };
+    return formatBackendData(err?.statusCode || 500, err?.message);
   }
 }

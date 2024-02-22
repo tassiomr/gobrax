@@ -81,11 +81,10 @@ export default function Form({
             <Select
               labelText={constants.modal.input.car}
               options={[]}
-              composeObject={(car: Car) => ({
-                label: car.name,
-                key: car.id!,
-                value: car.id!,
-              })}
+              composeObject={(item) => {
+                const car = item as Car;
+                return { label: car.name, key: car.id!, value: car.id! };
+              }}
               selectProps={form.register('carId')}
             />
           </Stack>
