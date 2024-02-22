@@ -6,7 +6,8 @@
 - [Objetivos](#objetivos)
 - [Início do Projeto](#início-do-projeto)
 - [Arquitetura](#arquitetura)
-- [Testes Vitest](#test-vitest)
+- [Testes (Cypress) E2E](#testes-cypress-e2e)
+- [Testes de Componentes](#test-vitest)
 - [Formatação de Código e Linting](#formatação-de-código-e-linting)
 - [Commits Convencionais](#commits-convencionais)
 - [Acessar a Aplicação](#acessar-a-aplicação)
@@ -85,7 +86,7 @@ A camada de dados é responsável por fornecer as informações necessárias par
 - **Services**: Interação com APIs para obter dados.
 - **Models**: Modelos de dados para representar as informações da aplicação.
 
-## Testes (Cypress) E2E Apenas
+## Testes (Cypress) E2E
 
 A pasta `cypress` contém testes de ponta a ponta para a aplicação. Os testes são escritos usando a ferramenta de teste Cypress para validar a funcionalidade da aplicação.
 
@@ -105,19 +106,25 @@ Ao utilizar o Cypress para testes, a equipe de desenvolvimento pode garantir a r
 
 Para testar a aplicação via linha de comando, os seguintes comandos podem ser usados para diferentes tipos de testes:
 
-#### Teste de Componente
+### Testes de Componentes
 
-Para executar testes de componentes:
+Os testes de componentes desempenham um papel fundamental na garantia da qualidade e confiabilidade do seu código. Eles permitem verificar se os componentes da sua aplicação se comportam conforme o esperado em diferentes cenários e condições.
+
+#### Por que testar componentes?
+
+- **Garantia de Qualidade:** Os testes ajudam a garantir que os componentes funcionem corretamente e produzam o resultado esperado.
+- **Identificação de Problemas:** Ao identificar problemas precocemente, os testes de componentes permitem corrigi-los antes que cheguem aos usuários finais, garantindo uma experiência mais estável.
+- **Refatoração Segura:** Ao refatorar ou modificar componentes existentes, os testes fornecem uma rede de segurança, garantindo que as alterações não introduzam regressões ou quebrem o comportamento existente.
+
+### Como executar os testes
+
+Este projeto utiliza [Vitest](https://vitest.io/) para executar testes de componentes. Para rodar os testes e visualizar os resultados em uma interface amigável, você pode usar o seguinte comando:
 
 ```bash
-npm run vitest:ui
+yarn vitest:ui
 ```
 
-Para executar testes de ponta a ponta (E2E):
-
-```bash
-npm run test-e2e
-```
+Este comando iniciará a execução dos testes e abrirá automaticamente uma interface gráfica no seu navegador padrão, onde você poderá ver o progresso dos testes, os resultados e quaisquer falhas que possam ocorrer.
 
 ## Formatação de Código e Linting
 
@@ -182,7 +189,7 @@ Ao aderir a esta convenção de mensagens de commit, o projeto mantém um histó
 
 ## Acessar a Aplicação
 
-Para acessar a aplicação implantada, clique [aqui](link_para_sua_aplicação).
+Para acessar a aplicação implantada, clique [aqui](https://gobrax-three.vercel.app/).
 
 Esta abordagem de CI/CD garante um processo de desenvolvimento robusto, mantendo a qualidade do código e entregando uma aplicação confiável aos usuários por meio de implantações automatizadas e eficientes.
 
