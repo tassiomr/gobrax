@@ -14,7 +14,7 @@ type DriversContextDataType = {
   deleteDriver: DriverFunction;
   editDriver: DriverFunction;
   getDrivers: () => Promise<void>;
-  selectADriver: DriverFunction;
+  selectADriver: (driver: Driver) => void;
   drivers: Driver[];
   isAddEditLoading: boolean;
   isLoading: boolean;
@@ -40,8 +40,10 @@ export function DriversContextDataProvider({
   };
 
   const deleteDriver = async (driver: Driver): Promise<void> => {
+    setIsAddEditLoading(true);
     const resp = await remove(driver);
     open(resp.status as AlertColor, resp.message);
+    setIsAddEditLoading(false);
   };
 
   const editDriver = async (driver: Driver): Promise<void> => {

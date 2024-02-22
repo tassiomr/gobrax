@@ -8,55 +8,65 @@ export default {
   },
   carsPage: {
     title: 'Veículos',
-    noDataYet: 'Não há nenhum carro no momento.\nQue tal adicionar algums?',
+    noDataYet: 'Não há nenhum carro no momento.\nQue tal adicionar alguns?',
     table: {
       headers: ['Id', 'Marca', 'Placa', 'Ações'],
     },
+    dialog: {
+      title: 'Deletar carro',
+      description:
+        'Você está prestes a deletar o $, essa operação é irreversível',
+    },
     modal: {
       add: {
-        title: 'Adiciona um novo carro',
-        description: 'Formulário que adiciona um novo carro no sistema',
+        title: 'Adicionar um novo carro',
+        description: 'Formulário para adicionar um novo carro no sistema',
       },
       edit: {
-        title: 'Edita o carro selecionado',
-        description: 'Formulário que edita um carro do sistema',
+        title: 'Editar o carro selecionado',
+        description: 'Formulário para editar um carro do sistema',
       },
       buttons: {
-        confirm: 'confirmar',
-        cancel: 'cancelar',
+        confirm: 'Confirmar',
+        cancel: 'Cancelar',
       },
       input: {
-        name: 'marca',
-        plate: 'placa (ABC-1234)',
+        name: 'Marca',
+        plate: 'Placa (ABC-1234)',
       },
     },
   },
   driversPage: {
     title: 'Motoristas',
-    noDataYet: 'Não há nenhum motorista no momento.\nQue tal adicionar algums?',
+    noDataYet: 'Não há nenhum motorista no momento.\nQue tal adicionar alguns?',
     table: {
       headers: ['', 'Id', 'Nome', 'Documento', 'Vinculado', 'Ações'],
       vinculed: {
-        yes: 'sim',
-        no: 'não',
+        yes: 'Sim',
+        no: 'Não',
       },
+    },
+    dialog: {
+      title: 'Deletar motorista',
+      description:
+        'Você está prestes a deletar o $, essa operação é irreversível',
     },
     modal: {
       add: {
-        title: 'Adiciona um novo motorista',
-        description: 'Formulário que adiciona um novo motorista no sistema',
+        title: 'Adicionar um novo motorista',
+        description: 'Formulário para adicionar um novo motorista no sistema',
       },
       edit: {
-        title: 'Edita o carro selecionado',
-        description: 'Formulário que edita um carro do sistema',
+        title: 'Editar o motorista selecionado',
+        description: 'Formulário para editar um motorista do sistema',
       },
       buttons: {
-        confirm: 'confirmar',
-        cancel: 'cancelar',
+        confirm: 'Confirmar',
+        cancel: 'Cancelar',
       },
       input: {
-        name: 'nome',
-        document: 'documento (999.999.999-00)',
+        name: 'Nome',
+        document: 'Documento (999.999.999-00)',
         car: 'Veículo',
       },
     },

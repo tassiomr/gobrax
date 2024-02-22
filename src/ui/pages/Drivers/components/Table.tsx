@@ -32,7 +32,6 @@ export default function TableDriver({
       data={drivers}
       renderCell={(item) => {
         const driver = item as Driver;
-        console.log(driver);
         return (
           <TableRow
             key={driver.id}

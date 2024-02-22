@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Buttons, Container } from '../../components';
+import { Buttons, Container, Dialog } from '../../components';
 import useData from './car.data';
 import Form from './components/Form';
 import Table from './components/Table';
@@ -18,8 +18,9 @@ export default function Cars() {
     canShowTable,
     isAddEditLoading,
     isEdit,
+    isOpenDialog,
   } = status;
-  const { cars, form, constants } = data;
+  const { cars, form, constants, carToDelete } = data;
   const {
     changeVisibleModalState,
     addCar,
@@ -27,6 +28,7 @@ export default function Cars() {
     editCar,
     handleOpenEditModal,
     handleCancelAction,
+    handleOpenDialog,
   } = actions;
 
   return (
@@ -49,7 +51,7 @@ export default function Cars() {
           />
           <Table
             editCar={handleOpenEditModal}
-            deleteCar={deleteCar}
+            deleteCar={handleOpenDialog}
             cars={cars}
             constants={constants}
           />
@@ -59,6 +61,17 @@ export default function Cars() {
         isVisible={canShowNoDataYet}
         message={constants.noDataYet}
         buttonAction={changeVisibleModalState}
+      />
+      <Dialog
+        isOpen={isOpenDialog}
+        cancelAction={handleOpenDialog}
+        confirmAction={deleteCar}
+        title={constants.dialog.title}
+        message={constants.dialog.description.replace(
+          '$',
+          carToDelete?.name ? carToDelete.name : '',
+        )}
+        isLoading={isAddEditLoading}
       />
     </Container>
   );

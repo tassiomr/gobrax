@@ -16,7 +16,8 @@ export type UseDataType = {
     constants: DriverConstants;
     form: FormType<Driver>;
     drivers: Array<Driver>;
-    selectedDriver?: Driver;
+    selectedDriver?: Driver | null;
+    driverToDelete?: Driver | null;
   };
   status: {
     canShowTable: boolean;
@@ -25,22 +26,26 @@ export type UseDataType = {
     isLoading: boolean;
     isAddEditLoading: boolean;
     isEdit: boolean;
+    isOpenDialog: boolean;
   };
   actions: {
     changeVisibleModalState: () => void;
     addDriver: DriverFunction;
-    deleteDriver: DriverFunction;
+    deleteDriver: () => void;
     editDriver: DriverFunction;
     selectDriver: DriverFunction;
     handleOpenEditModal: DriverFunction;
     handleCancelAction: () => void;
+    handleDeleteDialog: (driver?: Driver) => void;
   };
 };
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
-  const [selectedDriver, setSelectedDriver] = useState<Driver>();
+  const [selectedDriver, setSelectedDriver] = useState<Driver | null>();
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState(true);
+  const [driverToDelete, setDriverToDelete] = useState<Driver | null>();
 
   const {
     drivers,
@@ -61,6 +66,8 @@ export default function useData(): UseDataType {
     form.reset();
     changeVisibleModalState(false);
     setIsEdit(false);
+    setIsOpenDialog(false);
+    setDriverToDelete(null);
   };
 
   const handleAddDriver = async (driver: Driver) => {
@@ -70,6 +77,11 @@ export default function useData(): UseDataType {
 
   const handleEditDriver = async (driver: Driver) => {
     await editDriver(driver);
+    clearStatus();
+  };
+
+  const handleDeleteDriver = async () => {
+    await deleteDriver(driverToDelete!);
     clearStatus();
   };
 
@@ -86,21 +98,27 @@ export default function useData(): UseDataType {
   const selectDriver = (driver: Driver) => {
     selectADriver(driver);
     if (driver.id === selectedDriver?.id) {
-      setSelectedDriver(undefined);
+      setSelectedDriver(null);
     } else {
       setSelectedDriver(driver);
     }
+  };
+
+  const handleDeleteDialog = (driver?: Driver) => {
+    setDriverToDelete(driver);
+    setIsOpenDialog((state) => !state);
   };
 
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
       addDriver: handleAddDriver,
-      deleteDriver,
+      deleteDriver: handleDeleteDriver,
       editDriver: handleEditDriver,
       selectDriver,
       handleCancelAction: clearStatus,
       handleOpenEditModal,
+      handleDeleteDialog,
     },
     status: {
       isOpenModal,
@@ -109,12 +127,14 @@ export default function useData(): UseDataType {
       isEdit,
       isLoading,
       isAddEditLoading,
+      isOpenDialog,
     },
     data: {
       form,
       constants: constants.driversPage,
       drivers,
       selectedDriver,
+      driverToDelete,
     },
   };
 }

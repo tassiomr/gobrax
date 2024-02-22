@@ -12,6 +12,7 @@ export type UseDataType = {
     constants: CarConstants;
     form: FormType<Car>;
     cars: Array<Car>;
+    carToDelete?: Car | null;
   };
   status: {
     canShowTable: boolean;
@@ -20,20 +21,24 @@ export type UseDataType = {
     isLoading: boolean;
     isAddEditLoading: boolean;
     isEdit: boolean;
+    isOpenDialog: boolean;
   };
   actions: {
     changeVisibleModalState: () => void;
     handleOpenEditModal: CarFunction;
     addCar: CarFunction;
-    deleteCar: CarFunction;
+    deleteCar: () => void;
     editCar: CarFunction;
     handleCancelAction: () => void;
+    handleOpenDialog: (car?: Car) => void;
   };
 };
 
 export default function useData(): UseDataType {
   const [isOpenModal, changeVisibleModalState] = useState(false);
   const [isEdit, setIsEdit] = useState(true);
+  const [carToDelete, setCarToDelete] = useState<Car | null>(null);
+  const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
   const { cars, addCar, deleteCar, editCar, isLoading, isAddEditLoading } =
     useCars();
@@ -47,6 +52,8 @@ export default function useData(): UseDataType {
     form.reset();
     changeVisibleModalState(false);
     setIsEdit(false);
+    setIsOpenDialog(false);
+    setCarToDelete(null);
   };
   const handleAddCar = async (car: Car) => {
     await addCar(car);
@@ -55,6 +62,11 @@ export default function useData(): UseDataType {
 
   const handleEditCar = async (car: Car) => {
     await editCar(car);
+    clearStatus();
+  };
+
+  const handleDeleteCar = async () => {
+    await deleteCar(carToDelete!);
     clearStatus();
   };
 
@@ -67,14 +79,20 @@ export default function useData(): UseDataType {
     form.setValue('plate', car.plate);
   };
 
+  const handleOpenDialog = (car?: Car) => {
+    setCarToDelete(car!);
+    setIsOpenDialog((state) => !state);
+  };
+
   return {
     actions: {
       changeVisibleModalState: () => changeVisibleModalState((state) => !state),
       handleOpenEditModal,
       addCar: handleAddCar,
-      deleteCar,
+      deleteCar: handleDeleteCar,
       editCar: handleEditCar,
       handleCancelAction: clearStatus,
+      handleOpenDialog,
     },
     status: {
       isOpenModal,
@@ -83,11 +101,13 @@ export default function useData(): UseDataType {
       isAddEditLoading,
       isLoading,
       isEdit,
+      isOpenDialog,
     },
     data: {
       form,
       constants: constants.carsPage,
       cars,
+      carToDelete,
     },
   };
 }

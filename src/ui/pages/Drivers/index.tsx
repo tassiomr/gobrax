@@ -7,6 +7,7 @@ import EmptyData from '../../components/EmptyData';
 import Loading from '../../components/Loading';
 import HeaderPage from '../../components/HeaderPage';
 import SelectedDriver from './components/SelectedDriver';
+import Dialog from '../../components/Dialog';
 
 export default function Cars() {
   const vm = useData();
@@ -19,8 +20,9 @@ export default function Cars() {
     canShowTable,
     isAddEditLoading,
     isEdit,
+    isOpenDialog,
   } = status;
-  const { drivers, form, constants, selectedDriver } = data;
+  const { drivers, form, constants, selectedDriver, driverToDelete } = data;
   const {
     changeVisibleModalState,
     addDriver,
@@ -28,6 +30,7 @@ export default function Cars() {
     editDriver,
     handleOpenEditModal,
     handleCancelAction,
+    handleDeleteDialog,
     selectDriver,
   } = actions;
 
@@ -52,7 +55,7 @@ export default function Cars() {
           />
           <Table
             editDriver={handleOpenEditModal}
-            deleteDriver={deleteDriver}
+            deleteDriver={handleDeleteDialog}
             drivers={drivers}
             constants={constants}
             selectDriver={selectDriver}
@@ -63,6 +66,17 @@ export default function Cars() {
         isVisible={canShowNoDataYet}
         message={constants.noDataYet}
         buttonAction={changeVisibleModalState}
+      />
+      <Dialog
+        isOpen={isOpenDialog}
+        cancelAction={handleDeleteDialog}
+        confirmAction={deleteDriver}
+        title={constants.dialog.title}
+        message={constants.dialog.description.replace(
+          '$',
+          driverToDelete?.name ? driverToDelete.name : '',
+        )}
+        isLoading={isAddEditLoading}
       />
     </Container>
   );

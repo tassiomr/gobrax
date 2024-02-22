@@ -1,5 +1,6 @@
 export { default as AppBar } from './AppBar';
 export { default as Container } from './Container';
+export { default as Dialog } from './Dialog';
 export { default as EmptyData } from './EmptyData';
 export { default as HeaderPage } from './HeaderPage';
 export { default as Loading } from './Loading';

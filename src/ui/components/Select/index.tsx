@@ -24,7 +24,6 @@ export default function Selector({
   selectProps,
   composeObject,
 }: SelectorProps) {
-  console.log(options);
   return (
     <Stack display="flex" flexDirection={'column'} spacing={1} width={'100%'}>
       <FormLabel>{labelText}</FormLabel>
